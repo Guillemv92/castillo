@@ -1,4 +1,71 @@
 <?php include("templates/navbar.php"); ?>
+
+<!-- Start Ecorik Slider Area -->
+<section class="eorik-slider-area">
+			<div class="eorik-slider owl-carousel owl-theme">
+				<div class="eorik-slider-item slider-item-bg-1">
+					<div class="d-table">
+						<div class="d-table-cell">
+							<div class="container">
+								<div class="eorik-slider-text overflow-hidden one eorik-slider-text-one">
+									<h1>Alojate en el Castillo</h1>
+									<span>Discover the place where you have fun & enjoy a lot</span>
+									<div class="slider-btn">
+										<a class="default-btn" href="#">
+											Ver mas
+											<i class="flaticon-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="eorik-slider-item slider-item-bg-2">
+					<div class="d-table">
+						<div class="d-table-cell">
+							<div class="container">
+								<div class="eorik-slider-text overflow-hidden two eorik-slider-text-one">
+									<h1>Veni a Pasar el Dia</h1>
+									<span>Discover the place where you have fun & enjoy a lot</span>
+									<div class="slider-btn">
+										<a class="default-btn" href="#">
+											Ver mas
+											<i class="flaticon-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="eorik-slider-item slider-item-bg-3">
+					<div class="d-table">
+						<div class="d-table-cell">
+							<div class="container">
+								<div class="eorik-slider-text overflow-hidden three eorik-slider-text-one">
+									<h1>Te animas a Acampar?</h1>
+									<span>Discover the place where you have fun & enjoy a lot</span>
+									<div class="slider-btn">
+										<a class="default-btn" href="#">
+											Ver mas
+											<i class="flaticon-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="white-shape">
+				<img src="../assets/img/home-one/slider/white-shape.png" alt="Image">
+			</div>
+
+		</section>
+		<!-- End Ecorik Slider Area -->
+
+
 <!-- Start Explore Area -->
 <section class="explore-area pt-170 pb-100">
 	<div class="container">

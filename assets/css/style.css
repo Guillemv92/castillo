@@ -756,8 +756,8 @@ Preloader Area Style
 }
 
 .preloader .lds-ripple div:nth-child(2) {
-  -webkit-animation-delay: -0.5s;
-          animation-delay: -0.5s;
+  -webkit-animation-delay: -0.1s;
+          animation-delay: -0.1s;
 }
 
 @-webkit-keyframes lds-ripple {
@@ -1121,7 +1121,7 @@ Eorik Nav Area Style
 }
 
 /*
-Eorik SliderArea Style
+Eorik SliderArea Style CARRUSEL DEL INICIO
 ======================================================*/
 .eorik-slider-area {
   position: relative;
@@ -1133,8 +1133,8 @@ Eorik SliderArea Style
   right: 30px;
   margin: 0 !important;
   border-radius: 0 !important;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
   opacity: 0;
   -webkit-transform: translateY(-10px);
           transform: translateY(-10px);
@@ -1147,8 +1147,8 @@ Eorik SliderArea Style
   height: 40px;
   line-height: 40px;
   display: inline-block;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
   font-size: 26px;
   border-radius: 4px;
 }
@@ -1163,8 +1163,8 @@ Eorik SliderArea Style
   left: 30px;
   margin: 0 !important;
   border-radius: 0 !important;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
   opacity: 0;
   -webkit-transform: translateY(-10px);
           transform: translateY(-10px);
@@ -1177,8 +1177,8 @@ Eorik SliderArea Style
   height: 40px;
   line-height: 40px;
   display: inline-block;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
   font-size: 26px;
   border-radius: 4px;
 }
@@ -1226,8 +1226,8 @@ Eorik SliderArea Style
   border-radius: 0;
   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 .eorik-slider-area .owl-theme .owl-nav.disabled + .owl-dots .owl-dot:hover span {
@@ -1242,43 +1242,6 @@ Eorik SliderArea Style
           animation: fadeInUp 0.5s linear;
 }
 
-.eorik-slider-area .social-link {
-  position: absolute;
-  top: 50%;
-  right: 50px;
-  z-index: 1;
-  -webkit-transform: translateY(-30%);
-          transform: translateY(-30%);
-}
-
-.eorik-slider-area .social-link ul li {
-  margin-bottom: 10px;
-}
-
-.eorik-slider-area .social-link ul li:last-child {
-  margin-bottom: 0;
-}
-
-.eorik-slider-area .social-link ul li a {
-  background-color: #cc8c18;
-  color: #ffffff;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  border-radius: 50%;
-}
-
-.eorik-slider-area .social-link ul li a:hover {
-  -webkit-animation: rubberBand 1s linear;
-          animation: rubberBand 1s linear;
-}
-
-.eorik-slider-area .social-link ul li a:hover i {
-  -webkit-animation: fadeInLeft 0.5s linear;
-          animation: fadeInLeft 0.5s linear;
-}
 
 .eorik-slider-item {
   background-position: center center;
@@ -1314,7 +1277,7 @@ Eorik SliderArea Style
   color: #ffffff;
   margin-top: 30px;
   margin-bottom: -20px;
-  font-family: "beautiful-heartregular";
+  font-family: "beautiful-heartregular"; /* ACA ESTA EL TIPO DE LETRA DEL CARRUSEL */
 }
 
 .eorik-slider-item .eorik-slider-text span {
@@ -1383,15 +1346,15 @@ Eorik SliderArea Style
 }
 
 .slider-item-bg-1 {
-  background-image: url(../img/home-one/slider/slider-img-1.jpg);
+  background-image: url(../img/home-one/slider/slider-img-3.jpg);
 }
 
 .slider-item-bg-2 {
-  background-image: url(../img/home-one/slider/slider-img-2.jpg);
+  background-image: url(../img/home-one/slider/PRUEBA-PASAR.jpg);
 }
 
 .slider-item-bg-3 {
-  background-image: url(../img/home-one/slider/slider-img-3.jpg);
+  background-image: url(../img/home-one/slider/PRUEBA-CAMPING.jpg);
 }
 
 /*

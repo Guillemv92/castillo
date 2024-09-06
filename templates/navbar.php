@@ -44,6 +44,13 @@
     </head>
 
     <body>
+        
+    <div class="preloader">
+			<div class="lds-ripple">
+				<div></div>
+				<div></div>
+			</div>
+		</div>
 	
 		<!-- Start Ecorik Navbar Area -->
 		<div class="eorik-nav-style fixed-top">

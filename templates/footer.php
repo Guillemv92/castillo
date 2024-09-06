@@ -1,4 +1,4 @@
-		<!-- Start Footer Area -->
+<!-- Start Footer Area -->
 		<footer class="footer-top-area pt-140 jarallax">
 			<div class="container">
 

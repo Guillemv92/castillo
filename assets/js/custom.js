@@ -40,7 +40,7 @@
 		autoHeight: true,
 		autoplay: true,
 		smartSpeed: 1500,
-		autoplayHoverPause: true,
+		autoplayHoverPause: false,
 		animateOut: "fadeOut",
 		navText: [
 			"<i class='bx bx-chevron-left bx-fade-left'></i>",
