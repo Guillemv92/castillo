@@ -1,6 +1,6 @@
 <?php include("../templates/navbar.php"); ?>
 
-<br><br><br><br>
+<br><br>
 
 <!-- End News Area -->
 <section class="news-area ptb-100">
@@ -31,6 +31,10 @@
                                 🧺 Toallas  <br>  
                                 🕛 Check-in: 14:00hs
                                 🕚Check-out: 11:00hs (del día siguiente)
+								<br>
+								<p style="font-size: 24px; font-weight: bold; color: black;">
+								Precio: Gs. 260.000
+								</p>
                             </p>
 
                                 <a class="read-more" href="news-details.html">

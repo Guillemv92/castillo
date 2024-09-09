@@ -11,7 +11,7 @@
 									<h1>Alojate en el Castillo</h1>
 									<span>Discover the place where you have fun & enjoy a lot</span>
 									<div class="slider-btn">
-										<a class="default-btn" href="#">
+										<a class="default-btn" href="/servicios/habitaciones.php">
 											Ver mas
 											<i class="flaticon-right"></i>
 										</a>
@@ -29,7 +29,7 @@
 									<h1>Veni a Pasar el Dia</h1>
 									<span>Discover the place where you have fun & enjoy a lot</span>
 									<div class="slider-btn">
-										<a class="default-btn" href="#">
+										<a class="default-btn" href="/servicios/pasareldia.php">
 											Ver mas
 											<i class="flaticon-right"></i>
 										</a>
@@ -47,7 +47,7 @@
 									<h1>Te animas a Acampar?</h1>
 									<span>Discover the place where you have fun & enjoy a lot</span>
 									<div class="slider-btn">
-										<a class="default-btn" href="#">
+										<a class="default-btn" href="/servicios/camping.php">
 											Ver mas
 											<i class="flaticon-right"></i>
 										</a>
