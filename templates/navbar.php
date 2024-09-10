@@ -84,10 +84,28 @@
                         </ul>
                         <!-- Start Other Option -->
                         <div class="others-option">
-                            <a class="call-us" href="tel:+009-8765-4332">
-                                <i class="bx bx-phone-call bx-tada"></i>
-                                +009 8765 4332
-                            </a>
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link dropdown-toggle">
+											Iniciar sesion  <!-- No se pongo como ejemplo -->
+										<i class='bx bx-chevron-down'></i>  <!-- este es si le queremos quitar la flechita -->
+									</a>
+                                    <ul class="dropdown-menu">
+											<li class="nav-item">
+												<a href="index.html" class="nav-link">Mi cuenta</a>    <!-- poner iniciar sesion o cerrar sesion -->
+											</li>
+											<li class="nav-item">
+												<a href="index-2.html" class="nav-link">Mis reservas</a>
+											</li>
+											<li class="nav-item">
+												<a href="index-3.html" class="nav-link">Carrito</a>  <!-- No se pongo como ejemplo -->
+											</li>
+											<li class="nav-item">
+												<a href="index-4.html" class="nav-link">Admin</a>
+											</li>
+										</ul>
+                                </li>
+                            </ul>
                         </div>
                         <!-- End Other Option -->
                     </div>
