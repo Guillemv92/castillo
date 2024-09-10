@@ -60,7 +60,7 @@
             <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container">
                     <a class="navbar-brand" href="/index.php">
-                        <img src="/assets/img/logooooo.jpg" alt="Logo">
+                        <img src="/assets/img/logo2.png" alt="Logo" style="width: 140px; height:60px;">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav m-auto">
