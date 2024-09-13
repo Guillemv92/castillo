@@ -90,7 +90,7 @@
 									<li class="nav-item">
 										<?php if ($variable): ?>
 											<!-- Si la variable es true, solo muestra el enlace de "Iniciar sesión" -->
-											<a href="login.html" class="nav-link">Iniciar sesión</a>
+											<a href="/auth/login.php" class="nav-link">Iniciar sesión</a>
 										<?php else: ?>
 											<!-- Si la variable es false, muestra el enlace con el menú desplegable -->
 											<a href="#" class="nav-link dropdown-toggle">
