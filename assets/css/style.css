@@ -933,7 +933,7 @@ Eorik Nav Area Style
 
 .eorik-nav-style .navbar-area .main-nav {
   position: unset;
-  background: transparent; /* Cambiar de 'transparent' a gris oscuro */
+  background: #000000; /* Cambiar de 'transparent' a gris oscuro */
   padding-top: 0;
   padding-bottom: 0;
 }
