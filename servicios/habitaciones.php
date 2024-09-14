@@ -2,30 +2,30 @@
 
 <!-- Start Ecorik Slider Area -->
 <section class="eorik-slider-area">
-			<div class="eorik-slider owl-carousel owl-theme">
-				<div class="eorik-slider-item slider-item-bg-1">
-					<div class="d-table">
-						<div class="d-table-cell">
-							<div class="container">
-								<div class="eorik-slider-text overflow-hidden one eorik-slider-text-one">
-									<h1>Alojate en el Castillo</h1>
-									<span>Discover the place where you have fun & enjoy a lot</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			<div class="white-shape">
-				<img src="../assets/img/home-one/slider/white-shape.png" alt="Image">
-			</div>
+    <div class="eorik-slider owl-carousel owl-theme">
+        <div class="eorik-slider-item slider-item-bg-1">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="eorik-slider-text overflow-hidden one eorik-slider-text-one">
+                            <h1>Alojate en el Castillo</h1>
+                            <span>Discover the place where you have fun & enjoy a lot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		</section>
-		<!-- End Ecorik Slider Area -->
+    </div>
+    <div class="white-shape">
+        <img src="../assets/img/home-one/slider/white-shape.png" alt="Image">
+    </div>
 
-        <!-- Start Check Area -->
-		<div class="check-area mb-minus-10">
+</section>
+<!-- End Ecorik Slider Area -->
+
+<!-- Start Check Area -->
+<div class="check-area mb-minus-10">
     <div class="container">
         <form class="check-form" action="disponibilidad.php" method="GET">
             <div class="row align-items-center">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                            
+
                 <div class="col-lg-3 col-sm-6">
                     <div class="check-content">
                         <p>Fecha de salida</p>
@@ -56,7 +56,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="row">
@@ -72,7 +72,7 @@
                                         <option value="5">05</option>
                                     </select>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,14 +82,14 @@
                             Ver habitaciones
                             <i class="flaticon-right"></i>
                         </button>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-        <!-- End Check Section -->
+<!-- End Check Section -->
 
-    <br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 
 <?php include("../templates/footer.php"); ?>
