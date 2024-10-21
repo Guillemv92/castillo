@@ -26,7 +26,7 @@
         <!-- Start Check Area -->
 		<div class="check-area mb-minus-10">
     <div class="container">
-        <form class="check-form" action="disponibilidad.php" method="GET">
+        <form class="check-form" action="confirmacion.php" method="GET">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-6">
                     <div class="check-content">
