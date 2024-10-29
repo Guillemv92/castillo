@@ -1,4 +1,7 @@
-<?php include("templates/navbar.php"); ?>
+<?php 
+include("templates/navbar.php"); 
+require '../vendor/autoload.php';
+?>
 
 <!-- Start Ecorik Slider Area -->
 <section class="eorik-slider-area">

@@ -1,0 +1,15 @@
+{
+    "name": "guill/castillo",
+    "autoload": {
+        "psr-4": {
+            "Guill\\Castillo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guillermo",
+            "email": "guillemvera92@gmail.com"
+        }
+    ],
+    "require": {}
+}
