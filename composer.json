@@ -2,7 +2,8 @@
     "name": "guill/castillo",
     "autoload": {
         "psr-4": {
-            "Guill\\Castillo\\": "src/"
+            "App\\": "app/",
+            "Config\\": "config/"
         }
     },
     "authors": [

@@ -7,7 +7,7 @@ use App\Models\Reserva;
 class PasareldiaController {
     public function mostrarFormulario() {
         // Cargar la vista del formulario
-        include_once "../app/Views/pasareldia.php";
+        include_once __DIR__ . "/../Views/pasareldia.php";
     }
 
     public function procesarReserva() {

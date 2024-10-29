@@ -1,19 +1,18 @@
-<?php include("../templates/navbar.php"); ?>
+<?php include __DIR__ . "/../../templates/navbar.php"; ?>
 
 <br><br>
 
-<!-- End News Area -->
 <section class="news-area ptb-100">
-	<div class="container">
-		<div id="titulo-habitaciones">
-			<h1>Habitaciones disponibles</h1>
-		</div>
+    <div class="container">
+        <div id="titulo-habitaciones">
+            <h1>Habitaciones disponibles</h1>
+        </div>
 
-		<!-- Formulario de búsqueda justo debajo del título -->
-		<div id="habitaciones-form">
-			<div class="container" >
-				<form class="check-form" action="disponibilidad.php" method="GET">
-					<div class="row align-items-center">
+        <!-- Formulario de búsqueda justo debajo del título -->
+        <div id="habitaciones-form">
+            <div class="container">
+				<form class="check-form" action="/disponibilidad" method="GET">
+				<div class="row align-items-center">
 						<div class="col-lg-3 col-sm-6">
 							<div class="check-content">
 								<p>Fecha de entrada</p>
@@ -70,162 +69,37 @@
 							</div>
 						</div>
 					</div>
-				</form>
-			</div>
-		</div>
+                </form>
+            </div>
+        </div>
 
-
-		<div class="row">
-
-			<div class="col-lg-6 col-md-6">
-				<div class="single-news">
-					<div class="news-img">
-						<img src="../assets/img/matri1-disponibilidad.jpg" alt="Image">
-						<div class="dates">
-							<span>Gs. 260.000</span>
-						</div>
-					</div>
-					<div class="news-content-wrap">
-						<a href="news-details.html">
-							<h3>Habitacion matrimonial 1</h3>
-						</a>
-						<p>
-							🚿 Baño
-							❄️ Aire acondicionado
-							🧼 Jabón
-							🧺 Toallas <br>
-							🕛 Check-in: 14:00hs
-							🕚Check-out: 11:00hs (del día siguiente)
-							<br>
-						<p style="font-size: 24px; font-weight: bold; color: black;">
-							Precio: Gs. 260.000
-						</p>
-						</p>
-
-						<a class="read-more" href="news-details.html">
-							Reservar
-							<i class="flaticon-right"></i>
-						</a>
-						<br>
-						<a class="read-more" href="news-details.html">
-							Añadir al carrito
-							<i class="flaticon-right"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="col-lg-6 col-md-6">
-				<div class="single-news">
-					<div class="news-img">
-						<img src="../assets/img/matri2-disponibilidad.jpeg" alt="Image">
-						<div class="dates">
-							<span>Gs. 260.000</span>
-						</div>
-					</div>
-					<div class="news-content-wrap">
-						<a href="news-details.html">
-							<h3>Habitacion matrimonial 2</h3>
-						</a>
-						<p>
-							🚿 Baño
-							❄️ Aire acondicionado
-							🧼 Jabón
-							🧺 Toallas <br>
-							🕛 Check-in: 14:00hs
-							🕚Check-out: 11:00hs (del día siguiente)
-						</p>
-						<a class="read-more" href="news-details.html">
-							Reservar
-							<i class="flaticon-right"></i>
-						</a>
-						<br>
-						<a class="read-more" href="news-details.html">
-							Añadir al carrito
-							<i class="flaticon-right"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="col-lg-6 col-md-6">
-				<div class="single-news">
-					<div class="news-img">
-						<img src="../assets/img/triple-disponibilidad.jpg" alt="Image">
-						<div class="dates">
-							<span>Gs. 330.000</span>
-						</div>
-					</div>
-					<div class="news-content-wrap">
-						<a href="news-details.html">
-							<h3>Habitacion triple</h3>
-						</a>
-						<p>
-							🚿 Baño
-							❄️ Aire acondicionado
-							🧼 Jabón
-							🧺 Toallas <br>
-							🕛 Check-in: 14:00hs
-							🕚Check-out: 11:00hs (del día siguiente)
-						</p>
-						<a class="read-more" href="news-details.html">
-							Reservar
-							<i class="flaticon-right"></i>
-						</a>
-						<br>
-						<a class="read-more" href="news-details.html">
-							Añadir al carrito
-							<i class="flaticon-right"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="col-lg-6 col-md-6">
-				<div class="single-news">
-					<div class="news-img">
-						<img src="../assets/img/cuadruple-disponibilidad.jpg" alt="Image">
-						<div class="dates">
-							<span>Gs. 390.000</span>
-						</div>
-					</div>
-					<div class="news-content-wrap">
-						<a href="news-details.html">
-							<h3>Habitacion cuadruple</h3>
-						</a>
-						<p>
-							🚿 Baño
-							❄️ Aire acondicionado
-							🧼 Jabón
-							🧺 Toallas <br>
-							🕛 Check-in: 14:00hs
-							🕚Check-out: 11:00hs (del día siguiente)
-						</p>
-						<a class="read-more" href="news-details.html">
-							Reservar
-							<i class="flaticon-right"></i>
-						</a>
-						<br>
-						<a class="read-more" href="news-details.html">
-							Añadir al carrito
-							<i class="flaticon-right"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
+        <div class="row">
+            <?php if (!empty($habitacionesDisponibles)): ?>
+                <?php foreach ($habitacionesDisponibles as $habitacion): ?>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-news">
+                            <div class="news-img">
+								<img src="/assets/img/<?= htmlspecialchars($habitacion['nombre']); ?>-disponibilidad.jpg" alt="Image">
+                                <div class="dates">
+                                    <span>Gs. <?= htmlspecialchars($habitacion['precio']); ?></span>
+                                </div>
+                            </div>
+                            <div class="news-content-wrap">
+                                <h3><?= htmlspecialchars($habitacion['nombre']); ?></h3>
+                                <p>🚿 Baño ❄️ Aire acondicionado 🧼 Jabón 🧺 Toallas</p>
+                                <p><strong>Precio: Gs. <?= htmlspecialchars($habitacion['precio']); ?></strong></p>
+                                <a class="read-more" href="/reservar?habitacion=<?= htmlspecialchars($habitacion['id_habitacion']); ?>">
+                                    Reservar <i class="flaticon-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay habitaciones disponibles para las fechas seleccionadas.</p>
+            <?php endif; ?>
+        </div>
+    </div>
 </section>
-<!-- End News Area -->
 
-
-<?php include("../templates/footer.php"); ?>
+<?php include __DIR__ . "/../../templates/footer.php"; ?>

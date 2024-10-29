@@ -1,4 +1,6 @@
-<?php $variable = true; ?>
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="es">
 
@@ -70,15 +72,15 @@
 									<a href="/index.php">Inicio</a>
 								</li>
 								<li class="nav-item">
-									<a href="/servicios/habitaciones.php" class="nav-link dropdown-toggle">
+									<a href="/habitaciones" class="nav-link dropdown-toggle">
 										Habitaciones
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/servicios/pasareldia.php">Pasar el día</a>
+									<a href="/pasareldia">Pasar el día</a>
 								</li>
 								<li class="nav-item">
-									<a href="/servicios/camping.php">Camping</a>
+									<a href="/camping">Camping</a>
 								</li>
 								<li class="nav-item">
 									<a href="#">Contacto</a>
@@ -88,9 +90,9 @@
 							<div class="others-option">
 								<ul class="navbar-nav m-auto">
 									<li class="nav-item">
-										<?php if ($variable): ?>
+										<?php if (!isset($_SESSION['user'])): ?>
 											<!-- Si la variable es true, solo muestra el enlace de "Iniciar sesión" -->
-											<a href="/auth/login.php" class="nav-link">Iniciar sesión</a>
+											<a href="/login" class="nav-link">Iniciar sesión</a>
 										<?php else: ?>
 											<!-- Si la variable es false, muestra el enlace con el menú desplegable -->
 											<a href="#" class="nav-link dropdown-toggle">
@@ -110,6 +112,9 @@
 												<li class="nav-item">
 													<a href="admin.html" class="nav-link">Admin</a>
 												</li>
+												<li class="nav-item">
+                                                <a href="/logout" class="nav-link">Cerrar sesión</a> <!-- Opción para cerrar sesión -->
+                                            	</li>
 											</ul>
 										<?php endif; ?>
 									</li>
