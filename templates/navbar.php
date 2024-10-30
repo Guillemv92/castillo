@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -39,7 +41,10 @@ session_start();
 	<link rel="stylesheet" href="../assets/css/dark.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="../assets/css/responsive.css">
-
+	<!-- Flatpickr CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<!-- Flatpickr JS -->
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="../assets/img/logooooo.jpg">
 
@@ -107,7 +112,7 @@ session_start();
 													<a href="reservations.html" class="nav-link">Mis reservas</a>
 												</li>
 												<li class="nav-item">
-													<a href="cart.html" class="nav-link">Carrito</a>
+    												<a href="/carrito" class="nav-link">Carrito</a>
 												</li>
 												<li class="nav-item">
 													<a href="admin.html" class="nav-link">Admin</a>

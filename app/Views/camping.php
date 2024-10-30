@@ -29,9 +29,9 @@
                     <div class="check-content">
                         <p>Fecha de entrada</p>
                         <div class="form-group">
-                            <div class="input-group date" id="datetimepicker-1">
+                            <div class="input-group date">
                                 <i class="flaticon-calendar"></i>
-                                <input type="text" class="form-control" placeholder="29/02/2020" name="fecha_entrada">
+                                <input type="text" id="fechaEntradaCamping" class="form-control" name="fecha_entrada" placeholder="Entrada">
                             </div>
                         </div>
                     </div>
@@ -41,13 +41,14 @@
                     <div class="check-content">
                         <p>Fecha de salida</p>
                         <div class="form-group">
-                            <div class="input-group date" id="datetimepicker-2">
+                            <div class="input-group date">
                                 <i class="flaticon-calendar"></i>
-                                <input type="text" class="form-control" placeholder="29/02/2020" name="fecha_salida">
+                                <input type="text" id="fechaSalidaCamping" class="form-control" name="fecha_salida" placeholder="Salida">
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-3">
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
@@ -66,6 +67,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-3">
                     <div class="check-btn check-content mb-0">
                         <button type="submit" class="default-btn">
@@ -79,5 +81,35 @@
     </div>
 </div>
 <!-- End Check Section -->
+
+<!-- Script para el calendario y el selector de adultos -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Inicializar el selector de adultos con niceSelect
+        $('select').niceSelect();
+
+        // Configurar fechas
+        const fechaEntradaCamping = document.getElementById('fechaEntradaCamping');
+        const fechaSalidaCamping = document.getElementById('fechaSalidaCamping');
+
+        // Configuración para fecha de entrada
+        flatpickr(fechaEntradaCamping, {
+            minDate: "today",
+            dateFormat: "d/m/Y",
+            onChange: function(selectedDates) {
+                if (selectedDates.length > 0) {
+                    // Configurar fecha mínima de salida un día después de la entrada
+                    fechaSalidaCamping._flatpickr.set('minDate', new Date(selectedDates[0].getTime() + 24 * 60 * 60 * 1000));
+                }
+            }
+        });
+
+        // Configuración para fecha de salida
+        flatpickr(fechaSalidaCamping, {
+            minDate: "today",
+            dateFormat: "d/m/Y"
+        });
+    });
+</script>
 
 <?php include __DIR__ . "/../../templates/footer.php"; ?>

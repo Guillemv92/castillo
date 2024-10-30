@@ -23,6 +23,8 @@ if ($url == '/' || $url == '/index.php') {
     $pasareldiaController->mostrarFormulario();
 } elseif ($url == '/procesarReserva') {
     $pasareldiaController->procesarReserva();
+} elseif ($url == '/pasareldia/agregarAlCarrito') {
+    $pasareldiaController->agregarAlCarrito();
 } elseif ($url == '/habitaciones') {
     $habitacionesController->mostrarFormulario();
 } elseif ($url == '/disponibilidad') {
@@ -31,14 +33,38 @@ if ($url == '/' || $url == '/index.php') {
     $campingController->mostrarFormulario();
 } elseif ($url == '/procesarCampingReserva') {
     $campingController->procesarReserva();
-}elseif ($url == '/login') {
+} elseif ($url == '/login') {
     $authController->mostrarLogin();
-}elseif ($url == '/procesarLogin') {
+} elseif ($url == '/procesarLogin') {
     $authController->procesarLogin();
 } elseif ($url == '/logout') {
     $authController->logout();
-}elseif ($url == '/registro') {
+} elseif ($url == '/registro') {
     $authController->mostrarRegistro();
-}elseif ($url == '/procesarRegistro') {
+} elseif ($url == '/procesarRegistro') {
     $authController->procesarRegistro();
+}
+
+// Rutas para el carrito
+elseif ($url == '/carrito') {
+    include "../app/Views/carrito.php";
+} elseif ($url == '/carrito/confirmar') {
+    // Procesar la confirmación de las reservas en el carrito
+    if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+        // Aquí puedes agregar lógica adicional para guardar los datos en la base de datos
+
+        // Vaciar el carrito tras confirmar
+        $_SESSION['carrito'] = [];
+        echo "<script>alert('Reserva confirmada. Gracias por su compra');</script>";
+        echo "<script>window.location.href = '/';</script>";
+        exit();
+    } else {
+        echo "<script>alert('El carrito está vacío');</script>";
+        echo "<script>window.location.href = '/carrito';</script>";
+        exit();
+    }
+} else {
+    // Ruta no encontrada
+    http_response_code(404);
+    echo "Página no encontrada";
 }

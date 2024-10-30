@@ -24,6 +24,37 @@ class PasareldiaController {
             exit();
         }
     }
+
+    public function agregarAlCarrito() {
+        // Asegúrate de que la sesión está iniciada
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    
+        // Obtener datos de la reserva de pasar el día
+        $fechaEntrada = $_POST['fecha_entrada'];
+        $adultos = $_POST['adult'];
+        
+        // Crear un elemento de reserva
+        $reserva = [
+            'tipo' => 'Pasar el Día',
+            'fecha_entrada' => $fechaEntrada,
+            'adultos' => $adultos,
+        ];
+        
+        // Iniciar el carrito si no existe y agregar el elemento
+        if (!isset($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+        $_SESSION['carrito'][] = $reserva;
+        
+        // Redirigir al carrito
+        echo "<script>
+                alert('Reserva de Pasar el Día agregada al carrito. Ir al carrito para confirmar la compra.');
+                window.location.href = '/carrito';
+              </script>";
+    }
+    
 }
 
 

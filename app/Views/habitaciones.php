@@ -19,7 +19,6 @@
         <img src="../assets/img/home-one/slider/white-shape.png" alt="Image">
     </div>
 </section>
-
 <!-- Start Check Area -->
 <div class="check-area mb-minus-10">
     <div class="container">
@@ -29,9 +28,9 @@
                     <div class="check-content">
                         <p>Fecha de entrada</p>
                         <div class="form-group">
-                            <div class="input-group date" id="datetimepicker-1">
+                            <div class="input-group date">
                                 <i class="flaticon-calendar"></i>
-                                <input type="text" class="form-control" placeholder="29/02/2020" name="fecha_entrada">
+                                <input type="text" id="fechaEntrada" class="form-control" name="fecha_entrada" placeholder="Entrada">
                             </div>
                         </div>
                     </div>
@@ -41,9 +40,9 @@
                     <div class="check-content">
                         <p>Fecha de salida</p>
                         <div class="form-group">
-                            <div class="input-group date" id="datetimepicker-2">
+                            <div class="input-group date">
                                 <i class="flaticon-calendar"></i>
-                                <input type="text" class="form-control" placeholder="29/02/2020" name="fecha_salida">
+                                <input type="text" id="fechaSalida" class="form-control" name="fecha_salida" placeholder="Salida">
                             </div>
                         </div>
                     </div>
@@ -67,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-lg-3">
                     <div class="check-btn check-content mb-0">
                         <button type="submit" class="default-btn">
@@ -80,5 +80,33 @@
     </div>
 </div>
 <!-- End Check Section -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const fechaEntrada = document.getElementById('fechaEntrada');
+        const fechaSalida = document.getElementById('fechaSalida');
+
+        // Configurar fecha de entrada
+        flatpickr(fechaEntrada, {
+            minDate: "today",
+            dateFormat: "d/m/Y",
+            onChange: function(selectedDates) {
+                if (selectedDates.length > 0) {
+                    // Configurar fecha mínima para salida a un día después de la entrada
+                    fechaSalida._flatpickr.set('minDate', new Date(selectedDates[0].getTime() + 24 * 60 * 60 * 1000));
+                }
+            }
+        });
+
+        // Configurar fecha de salida
+        flatpickr(fechaSalida, {
+            minDate: "today",
+            dateFormat: "d/m/Y"
+        });
+
+        // Inicializar niceSelect para el selector de adultos
+        $('select').niceSelect();
+    });
+</script>
 
 <?php include __DIR__ . "/../../templates/footer.php"; ?>

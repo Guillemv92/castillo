@@ -1273,28 +1273,6 @@ Check Area Style ESTO ES EL CUADRO DONDE SE PONEN LOS DATOS PARA IR A RESERVAR
   padding: 20px;
 }
 
-.check-content p {
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin: 0;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.check-content p i {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.check-content a {
-  text-decoration: none;
-}
-
-.check-content .form-group {
-  position: relative;
-}
-
 .check-content .form-group .form-control {
   height: auto !important;
   border: none !important;
@@ -1372,13 +1350,15 @@ Check Area Style ESTO ES EL CUADRO DONDE SE PONEN LOS DATOS PARA IR A RESERVAR
 }
 
 .check-content .form-group .nice-select .list {
-  z-index: 999;
-  width: 100px;
-  overflow-y: auto;
-  height: 200px;
-  border-radius: 0;
-  margin: auto;
-  left: -14px;
+  position: absolute;
+  top: auto;
+  bottom: 100%; /* Hace que la lista se despliegue hacia arriba */
+  margin-bottom: 10px; /* Espacio entre el selector y la lista */
+  max-height: 150px; /* Limita la altura */
+  overflow-y: auto; /* Despliega con scroll si hay muchas opciones */
+  z-index: 1000; /* Asegura que la lista esté sobre otros elementos */
+  background-color: white; /* Fondo blanco para visibilidad */
+  border: 1px solid #cc8c18; /* Agrega un borde */
 }
 
 .check-content .form-group .nice-select .option {
@@ -1509,6 +1489,32 @@ Check Area Style ESTO ES EL CUADRO DONDE SE PONEN LOS DATOS PARA IR A RESERVAR
   background-color: #cc8c18;
   color: #ffffff;
 }
+
+/* Estilos específicos para el selector de adultos */
+.check-content .form-group .form-content {
+  position: relative;
+}
+
+.check-content .form-group .form-content:focus + .nice-select .list {
+  top: auto; 
+  bottom: 110%; /* Despliegue hacia arriba */
+  margin-bottom: 10px; /* Espacio entre el campo y la lista desplegable */
+  max-height: 150px; /* Limitar la altura */
+  overflow-y: auto; /* Agregar scroll si hay muchas opciones */
+}
+
+/* Reducir el ancho del container solo en la página Pasar el Día */
+.container-dia {
+  max-width: 1000px; /* Ajusta este valor según el ancho deseado */
+  margin: 0 auto; /* Centra el container */
+}
+
+/* Ajuste para alinear y centrar los campos en el mismo nivel */
+.container-dia .check-content {
+  align-items: center;
+  justify-content: center;
+}
+
 
 /*
 Explore Area Style
