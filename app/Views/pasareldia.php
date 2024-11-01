@@ -52,16 +52,37 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="check-btn check-content mb-0">
-                        <button type="submit" class="default-btn">
+                    <div class="check-btn check-content mb-0 d-flex justify-content-between">
+                        <!-- Botón para ir a la página de confirmación con datos en la URL -->
+                        <a href="#" class="default-btn" onclick="redireccionarConDatos(event)">
                             Reservar
                             <i class="flaticon-right"></i>
+                        </a>
+
+                        <script>
+                            function redireccionarConDatos(event) {
+                                event.preventDefault();
+
+                                const fechaEntrada = document.getElementById('fechaEntradaPasarDia').value;
+                                const adultos = document.querySelector('select[name="adult"]').value;
+
+                                if (fechaEntrada && adultos) {
+                                    // Redirigir a la URL con los datos como parámetros
+                                    window.location.href = `/confirmacionReserva?servicio=pasar_el_dia&fecha_entrada=${encodeURIComponent(fechaEntrada)}&adultos=${adultos}`;
+                                } else {
+                                    alert("Por favor, completa todos los campos.");
+                                }
+                            }
+                        </script>
+                        <!-- Botón para añadir al carrito -->
+                        <button type="submit" class="default-btn" style="background-color: #28a745;">
+                            Añadir al Carrito
+                            <i class="flaticon-cart"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </form>
-
     </div>
 </div>
 

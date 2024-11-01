@@ -43,17 +43,16 @@ if ($url == '/' || $url == '/index.php') {
     $authController->mostrarRegistro();
 } elseif ($url == '/procesarRegistro') {
     $authController->procesarRegistro();
+}  elseif ($url == '/confirmacionReserva') {
+    include "../app/Views/confirmacionReserva.php";
 }
 
 // Rutas para el carrito
 elseif ($url == '/carrito') {
     include "../app/Views/carrito.php";
 } elseif ($url == '/carrito/confirmar') {
-    // Procesar la confirmación de las reservas en el carrito
     if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-        // Aquí puedes agregar lógica adicional para guardar los datos en la base de datos
-
-        // Vaciar el carrito tras confirmar
+        // Procesar confirmación
         $_SESSION['carrito'] = [];
         echo "<script>alert('Reserva confirmada. Gracias por su compra');</script>";
         echo "<script>window.location.href = '/';</script>";
@@ -64,7 +63,6 @@ elseif ($url == '/carrito') {
         exit();
     }
 } else {
-    // Ruta no encontrada
     http_response_code(404);
     echo "Página no encontrada";
 }
