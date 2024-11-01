@@ -7,42 +7,71 @@ if (session_status() === PHP_SESSION_NONE) {
 include __DIR__ . "/../../templates/navbar.php";
 ?>
 
-<br><br><br><br><br><br>
+<!-- Start Cart Area -->
+<section class="cart-area ptb-100">
+    <div class="container">
+        <h2>Carrito de Reservas</h2>
 
-<h2>Carrito de Reservas</h2>
+        <?php if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])): ?>
+            <div class="cart-wraps">
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Servicio</th>
+                                <th scope="col">Fecha de Entrada</th>
+                                <th scope="col">Adultos</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($_SESSION['carrito'] as $index => $item): ?>
+                                <tr>
+                                    <td class="product-name">
+                                        <?= htmlspecialchars($item['tipo']); ?>
+                                    </td>
+                                    <td class="product-date">
+                                        <?= htmlspecialchars($item['fecha_entrada']); ?>
+                                    </td>
+                                    <td class="product-quantity">
+                                        <?= htmlspecialchars($item['adultos']); ?>
+                                    </td>
+                                    <td class="product-actions">
+                                        <a href="/carrito/remover?index=<?= $index; ?>" class="remove" onclick="return confirm('¿Estás seguro de que deseas eliminar esta reserva?');">
+                                            <i class="bx bx-trash"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
 
-<?php if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])): ?>
-    <table style="width: 100%; border-collapse: collapse;">
-        <thead>
-            <tr>
-                <th style="border: 1px solid #ccc; padding: 8px;">Servicio</th>
-                <th style="border: 1px solid #ccc; padding: 8px;">Fecha de Entrada</th>
-                <th style="border: 1px solid #ccc; padding: 8px;">Adultos</th>
-                <th style="border: 1px solid #ccc; padding: 8px;">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($_SESSION['carrito'] as $index => $item): ?>
-                <tr>
-                    <td style="border: 1px solid #ccc; padding: 8px;"><?= htmlspecialchars($item['tipo']); ?></td>
-                    <td style="border: 1px solid #ccc; padding: 8px;"><?= htmlspecialchars($item['fecha_entrada']); ?></td>
-                    <td style="border: 1px solid #ccc; padding: 8px;"><?= htmlspecialchars($item['adultos']); ?></td>
-                    <td style="border: 1px solid #ccc; padding: 8px;">
-                        <a href="/carrito/remover?index=<?= $index; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar esta reserva?');">Eliminar</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                <!-- Cart Buttons -->
+                <div class="cart-buttons">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7 col-sm-7 col-md-7">
+                            <div class="continue-shopping-box">
+                                <a href="/" class="default-btn">
+                                    Seguir Reservando
+                                    <i class="flaticon-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-sm-5 col-md-5 text-right">
+                            <a href="/carrito/confirmar" class="default-btn">
+                                Confirmar Reservas
+                                <i class="flaticon-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <p>Tu carrito está vacío.</p>
+        <?php endif; ?>
+    </div>
+</section>
+<!-- End Cart Area -->
 
-    <!-- Botón para confirmar las reservas -->
-    <a href="/carrito/confirmar" class="btn btn-primary" style="margin-top: 20px; display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px;">
-        Confirmar Reservas
-    </a>
-
-<?php else: ?>
-    <p>Tu carrito está vacío.</p>
-<?php endif; ?>
-
-<br><br><br><br><br>
 <?php include __DIR__ . "/../../templates/footer.php"; ?>

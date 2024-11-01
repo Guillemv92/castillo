@@ -1,4 +1,7 @@
-<?php include("../templates/navbar.php"); ?>
+<?php
+
+include __DIR__ . "../../../templates/navbar.php";
+?>
 
 <!-- End Service Details Area -->
 <section class="service-details-area room-details-right-sidebar ptb-100">
@@ -162,4 +165,4 @@
 		</section>
 		<!-- End Service Details Area -->
 
-<?php include("../templates/footer.php"); ?>
+<?php include __DIR__ . "../../../templates/footer.php"; ?>
