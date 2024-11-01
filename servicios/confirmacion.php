@@ -6,9 +6,16 @@
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="service-details-wrap service-right">
+							<h3>Aca va a ir el nombre del servicio elegido o habitacion elegida</h3>
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas veritatis ducimus rerum sunt dignissimos libero et eum modi! Consequuntur rem incidunt et ducimus magnam sunt rerum hic beatae sed obcaecati. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium asperiores eos obcaecati nostrum sed, corporis placeat quasi pariatur id, est iure, minus.</p>
+
+							<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words.</p>
+							
+							<p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem, you to be sure there.</p>
+						
 							<div class="service-img-wrap owl-carousel owl-theme mb-30">
 								<div class="single-services-imgs">
-									<img src="../assets/img/home-one/slider/PRUEBA-PASAR2.jpg" alt="Image">
+									<img src="../assets/img/services-details/2.jpg" alt="Image">
 								</div>
 								<div class="single-services-imgs">
 									<img src="../assets/img/services-details/2.jpg" alt="Image">
@@ -20,18 +27,6 @@
 									<img src="../assets/img/services-details/4.jpg" alt="Image">
 								</div>
 							</div>
-							<h3>The charming view of the city</h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas veritatis ducimus rerum sunt dignissimos libero et eum modi! Consequuntur rem incidunt et ducimus magnam sunt rerum hic beatae sed obcaecati. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium asperiores eos obcaecati nostrum sed, corporis placeat quasi pariatur id, est iure, minus.</p>
-
-							<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words.</p>
-							
-							<p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem, you to be sure there.</p>
-							<div class="rooms-details mb-30">
-								<img src="../assets/img/rooms/rooms-1.jpg" alt="Image">
-							</div>
-
-							<p class="mb-30">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit veritatis repellendus magnam tempora quibusdam dignissimos ab hic autem, dolore facere, soluta excepturi neque necessitatibus qui tenetur, ipsa quaerat nostrum eveniet? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit veritatis repellendus magnam tempora quibusdam dignissimos ab hic autem, dolore facere, soluta excepturi neque necessitatibus qui tenetur, ipsa quaerat nostrum eveniet?</p>
-
 						</div>
 					</div>
 
@@ -123,35 +118,6 @@
 									<li>
 										9:00 AM – 8:00 PM
 										<i class='bx bx-time'></i>
-									</li>
-								</ul>
-							</div>
-							<div class="service-list service-card">
-								<h3 class="service-details-title">Download Brochures</h3>
-								<ul>
-									<li>
-										<a href="#">
-											PDF File (1)
-											<i class='bx bxs-cloud-download'></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											PDF File (2)
-											<i class='bx bxs-cloud-download'></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											PDF File (3)
-											<i class='bx bxs-cloud-download'></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											PDF File (4)
-											<i class='bx bxs-cloud-download'></i>
-										</a>
 									</li>
 								</ul>
 							</div>
