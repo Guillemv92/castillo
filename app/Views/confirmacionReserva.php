@@ -1,23 +1,9 @@
 <?php
-session_start(); // Iniciar la sesión si aún no está iniciada
+session_start();
 
 include __DIR__ . "/../../templates/navbar.php";
 
-// Obtener datos de la reserva desde los parámetros de la URL
-$servicio = $_GET['servicio'] ?? '';
-$fechaEntrada = $_GET['fecha_entrada'] ?? 'N/A';
-$adultos = $_GET['adultos'] ?? 1;
-$fechaSalida = $_GET['fecha_salida'] ?? 'N/A'; // Agregar si también se incluye una fecha de salida
-
-// Lógica para establecer el costo basado en el servicio seleccionado (podrías adaptarla para llamar a la base de datos)
-$costo = 0;
-if ($servicio === 'pasar_el_dia') {
-    $costo = 50000; // Ejemplo de costo para pasar el día
-} elseif ($servicio === 'camping') {
-    $costo = 80000; // Ejemplo de costo para camping
-} elseif ($servicio === 'habitacion') {
-    $costo = 120000; // Ejemplo de costo para una habitación
-}
+// Los datos ya están disponibles gracias al controlador
 ?>
 
 <!-- Start Service Details Area -->
@@ -63,7 +49,11 @@ if ($servicio === 'pasar_el_dia') {
                                 <i class='bx bx-check'></i>
                             </li>
                             <li>
-                                <strong>Precio Total:</strong> Gs. <?= number_format($costo, 0, ',', '.'); ?>
+                                <strong>Precio Unitario:</strong> Gs. <?= number_format($precioUnitario, 3, ',', '.'); ?>
+                                <i class='bx bx-check'></i>
+                            </li>
+                            <li>
+                                <strong>Precio Total:</strong> Gs. <?= number_format($costoTotal, 3, ',', '.'); ?>
                                 <i class='bx bx-check'></i>
                             </li>
                         </ul>
@@ -72,19 +62,20 @@ if ($servicio === 'pasar_el_dia') {
                         <h3 class="service-details-title">Confirmar Reserva</h3>
                         <p>Presiona "Confirmar Reserva" para completar el proceso de reserva de <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $servicio))); ?>.</p>
                         
-                        <!-- Botón de Reservar -->
-                        <a href="/carrito/agregar?servicio=<?= $servicio; ?>" class="default-btn" style="margin-bottom: 15px;">
-                            Reservar
-                            <i class="flaticon-right"></i>
-                        </a>
-                        
-                        <!-- Botón de Confirmar Reserva -->
-                        <a href="/carrito/confirmar" class="default-btn">
-                            Confirmar Reserva
-                            <i class="flaticon-right"></i>
-                        </a>
+                        <!-- Formulario para confirmar la reserva -->
+                        <form action="/procesarReserva" method="POST">
+                            <input type="hidden" name="servicio" value="<?= htmlspecialchars($servicio); ?>">
+                            <input type="hidden" name="fecha_entrada" value="<?= htmlspecialchars($fechaEntrada); ?>">
+                            <input type="hidden" name="fecha_salida" value="<?= htmlspecialchars($fechaSalida ?? $fechaEntrada); ?>">
+                            <input type="hidden" name="adultos" value="<?= htmlspecialchars($adultos); ?>">
+                            <input type="hidden" name="precio_total" value="<?= htmlspecialchars($costoTotal); ?>">
+                            <button type="submit" class="default-btn">
+                                Confirmar Reserva
+                                <i class="flaticon-right"></i>
+                            </button>
+                        </form>
                     </div>
-                    
+
                    <!-- Sección FAQ -->
                    <div class="service-faq service-card">
                         <h3 class="service-details-title">FAQ</h3>
@@ -130,7 +121,6 @@ if ($servicio === 'pasar_el_dia') {
                         </div>
                     </div>
 
-
                     <!-- Información de Contacto -->
                     <div class="service-list service-card">
                         <h3 class="service-details-title">Contact Info</h3>
@@ -153,7 +143,7 @@ if ($servicio === 'pasar_el_dia') {
                             </li>
                             <li>
                                 9:00 AM – 8:00 PM
-                                <i class='bx bx-time'></i>
+                                <i class="bx bx-time"></i>
                             </li>
                         </ul>
                     </div>

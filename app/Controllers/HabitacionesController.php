@@ -5,6 +5,12 @@ namespace App\Controllers;
 class HabitacionesController {
     // Muestra el formulario para verificar disponibilidad de habitaciones
     public function mostrarFormulario() {
+
+        session_start();
+        if (!isset($_SESSION['user'])) {
+            header("Location: /login");
+            exit();
+        }
         include_once __DIR__ . '/../Views/habitaciones.php';
     }
 

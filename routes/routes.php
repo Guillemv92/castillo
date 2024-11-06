@@ -5,12 +5,15 @@ use App\Controllers\PasareldiaController;
 use App\Controllers\HabitacionesController;
 use App\Controllers\DisponibilidadController;
 use App\Controllers\CampingController;
+use App\Controllers\ConfirmacionController; // Importar el nuevo controlador
 
+// Instanciar los controladores
 $authController = new AuthController();
 $pasareldiaController = new PasareldiaController();
 $habitacionesController = new HabitacionesController();
 $disponibilidadController = new DisponibilidadController();
 $campingController = new CampingController();
+$confirmacionController = new ConfirmacionController(); // Instanciar el controlador de confirmación
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -21,8 +24,6 @@ if ($url == '/' || $url == '/index.php') {
     exit();
 } elseif ($url == '/pasareldia') {
     $pasareldiaController->mostrarFormulario();
-} elseif ($url == '/procesarReserva') {
-    $pasareldiaController->procesarReserva();
 } elseif ($url == '/pasareldia/agregarAlCarrito') {
     $pasareldiaController->agregarAlCarrito();
 } elseif ($url == '/habitaciones') {
@@ -43,8 +44,10 @@ if ($url == '/' || $url == '/index.php') {
     $authController->mostrarRegistro();
 } elseif ($url == '/procesarRegistro') {
     $authController->procesarRegistro();
-}  elseif ($url == '/confirmacionReserva') {
-    include "../app/Views/confirmacionReserva.php";
+} elseif ($url == '/confirmacionReserva') {
+    $confirmacionController->mostrarConfirmacion(); // Llamada al método para mostrar la confirmación
+} elseif ($url == '/procesarReserva') {
+    $confirmacionController->procesarReserva(); // Procesar la reserva
 }
 
 // Rutas para el carrito
@@ -52,7 +55,6 @@ elseif ($url == '/carrito') {
     include "../app/Views/carrito.php";
 } elseif ($url == '/carrito/confirmar') {
     if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-        // Procesar confirmación
         $_SESSION['carrito'] = [];
         echo "<script>alert('Reserva confirmada. Gracias por su compra');</script>";
         echo "<script>window.location.href = '/';</script>";

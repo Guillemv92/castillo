@@ -3054,11 +3054,12 @@ Cart Area Style
 /*
 
 
-
+*/
 #habitaciones-form {
   margin-top: 0;  /* Ajusta el margen superior */
   padding-top: 0; /* Ajusta el padding superior */
 }
+
 
 #habitaciones-form .mb-minus-10 {
   margin-bottom: 0; /* Ajusta el margen inferior si es necesario */
