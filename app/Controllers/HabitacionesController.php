@@ -6,7 +6,9 @@ class HabitacionesController {
     // Muestra el formulario para verificar disponibilidad de habitaciones
     public function mostrarFormulario() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION['user'])) {
             header("Location: /login");
             exit();

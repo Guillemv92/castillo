@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\Reserva;
@@ -7,8 +6,9 @@ use App\Models\Servicio;
 
 class PasareldiaController {
     public function mostrarFormulario() {
-
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION['user'])) {
             header("Location: /login");
             exit();
@@ -23,7 +23,7 @@ class PasareldiaController {
             $adultos = $_POST['adult'];
             $action = $_POST['action'];
 
-             // ID del servicio para "pasar el día" (ajusta según tu base de datos)
+            // ID del servicio para "pasar el día" 
             $idServicioPasarElDia = 1;
 
             // Instancia del modelo Servicio para verificar disponibilidad de "pasar el día"
@@ -32,13 +32,15 @@ class PasareldiaController {
 
             if ($disponible) {
                 if ($action === 'reservar') {
-                    header("Location: /confirmacionReserva?servicio=pasar_el_dia&fecha_entrada=$fechaEntrada&adultos=$adultos");
+                    header("Location: /confirmacionReserva?servicio=pasar_el_dia&fecha_entrada=" . urlencode($fechaEntrada) . "&adultos=" . urlencode($adultos));
                     exit();
-                } elseif ($action === 'carrito') {
+                }elseif ($action === 'carrito') {
+                    // Iniciar el carrito si no existe
                     if (!isset($_SESSION['carrito'])) {
                         $_SESSION['carrito'] = [];
                     }
                     
+                    // Agregar al carrito
                     $_SESSION['carrito'][] = [
                         'servicio' => 'pasar_el_dia',
                         'fecha_entrada' => $fechaEntrada,
@@ -50,6 +52,7 @@ class PasareldiaController {
                     exit();
                 }
             } else {
+                // Manejo de falta de disponibilidad
                 echo "<script>alert('Lo sentimos, no hay disponibilidad suficiente para pasar el día en la fecha seleccionada.');</script>";
                 echo "<script>window.location.href = '/pasareldia';</script>";
                 exit();

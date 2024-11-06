@@ -24,8 +24,6 @@ if ($url == '/' || $url == '/index.php') {
     exit();
 } elseif ($url == '/pasareldia') {
     $pasareldiaController->mostrarFormulario();
-} elseif ($url == '/pasareldia/agregarAlCarrito') {
-    $pasareldiaController->agregarAlCarrito();
 } elseif ($url == '/habitaciones') {
     $habitacionesController->mostrarFormulario();
 } elseif ($url == '/disponibilidad') {
@@ -46,7 +44,9 @@ if ($url == '/' || $url == '/index.php') {
     $authController->procesarRegistro();
 } elseif ($url == '/confirmacionReserva') {
     $confirmacionController->mostrarConfirmacion(); // Llamada al método para mostrar la confirmación
-} elseif ($url == '/procesarReserva') {
+} elseif ($url == '/procesarPasarDiaReserva') {
+    $pasareldiaController->procesarReserva(); // Procesar la reserva
+}elseif ($url == '/procesarReserva') {
     $confirmacionController->procesarReserva(); // Procesar la reserva
 }
 

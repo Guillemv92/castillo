@@ -5,63 +5,60 @@ namespace App\Controllers;
 use App\Models\Servicio;
 use App\Models\Reserva;
 
-class ConfirmacionController {
+class ConfirmacionController
+{
     public function mostrarConfirmacion() {
-
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION['user'])) {
             header("Location: /login");
             exit();
         }
-        // Obtener datos de la reserva desde los parámetros de la URL
-        $servicio = $_GET['servicio'] ?? '';
-        $fechaEntrada = $_GET['fecha_entrada'] ?? 'N/A';
-        $adultos = $_GET['adultos'] ?? 1;
-        $fechaSalida = $_GET['fecha_salida'] ?? 'N/A';
+    
+        // Verifica los datos recibidos por la URL
+        $servicio = $_GET['servicio'] ?? null;
+        $fechaEntrada = $_GET['fecha_entrada'] ?? null;
+        $adultos = $_GET['adultos'] ?? null;
+        $fechaSalida = $_GET['fecha_salida'] ?? null;
 
-        // Definir el ID del servicio en la base de datos según el tipo de servicio
+        // Continuar con la lógica original de obtener el precio y calcular el costo total
         $idServicio = $this->obtenerIdServicio($servicio);
-
-        // Usar el modelo Servicio para obtener el precio unitario
         $servicioModel = new Servicio();
         $precioUnitario = $servicioModel->obtenerPrecioServicio($idServicio);
-
-        // Calcular el costo total
         $costoTotal = $precioUnitario * $adultos;
-
-        // Pasar los datos a la vista de confirmación
-        // Asegúrate de que las variables estén disponibles en la vista
+    
         include __DIR__ . '/../Views/confirmacionReserva.php';
     }
 
     // Método para procesar la reserva al confirmar
-    public function procesarReserva() {
+    public function procesarReserva()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             if (!isset($_SESSION['user'])) {
                 header("Location: /login");
                 exit();
             }
-        
 
-            // Obtener datos del formulario
-            $servicio = $_POST['servicio'];
-            $fechaEntrada = $_POST['fecha_entrada'];
-            $fechaSalida = $_POST['fecha_salida'] ?? null; // Puede ser null si es "pasar el día"
-            $adultos = $_POST['adultos'];
-            $precioTotal = $_POST['precio_total'];
+            // Recibir los datos del formulario
+            $servicio = $_POST['servicio'] ?? null;
+            $fechaEntrada = $_POST['fecha_entrada'] ?? null;
+            $fechaSalida = $_POST['fecha_salida'] ?? null;
+            $adultos = $_POST['adultos'] ?? null;
+            $precioTotal = $_POST['precio_total'] ?? null;
 
             // Obtener el ID del servicio
             $idServicio = $this->obtenerIdServicio($servicio);
 
-            // Obtener el ID de la persona (usuario)
-            $idPersona = $_SESSION['id_persona'];
+            // Obtener el ID de la persona (usuario autenticado)
+            $idPersona = $_SESSION['user']['id'];
 
             // Crear una instancia del modelo Reserva
             $reservaModel = new Reserva();
 
             // Preparar los datos para la reserva
-            $estado = 1; // Puedes ajustar el estado según tu lógica (1: activo, etc.)
+            $estado = 1; // Ajustar el estado según tu lógica
 
             // Datos del servicio a reservar
             $servicios = [
@@ -69,7 +66,7 @@ class ConfirmacionController {
                     'id_servicio' => $idServicio,
                     'cantidad' => $adultos,
                     'fecha_inicio' => $fechaEntrada,
-                    'fecha_fin' => $fechaSalida ?? $fechaEntrada // Si no hay fecha de salida, usar fecha de entrada
+                    'fecha_fin' => $fechaSalida ?? $fechaEntrada // Usar fecha de entrada si no hay fecha de salida
                 ]
             ];
 
@@ -94,13 +91,13 @@ class ConfirmacionController {
     }
 
     // Método auxiliar para definir el ID del servicio
-    private function obtenerIdServicio($servicio) {
+    private function obtenerIdServicio($servicio)
+    {
         switch ($servicio) {
             case 'camping':
                 return 2;
             case 'pasar_el_dia':
                 return 1;
-            // Agregar más casos según los servicios
             default:
                 return null;
         }

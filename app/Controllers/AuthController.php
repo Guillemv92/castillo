@@ -26,9 +26,11 @@ class AuthController {
             $usuario = $usuarioModel->autenticar($email, $password);
 
             if ($usuario) {
-                // Guardar el usuario en la sesión si las credenciales son válidas
                 session_start();
-                $_SESSION['user'] = $usuario['nombre']; // Puedes almacenar otros datos si es necesario
+                $_SESSION['user'] = [
+                    'id' => $usuario['id_persona'], // Guarda el ID del usuario en la sesión
+                    'nombre' => $usuario['nombre']
+                ];
                 header("Location: /index.php"); 
                 exit();
             } else {

@@ -22,7 +22,7 @@
 
 <div class="check-area mb-minus-10">
     <div class="container container-dia">
-        <form class="check-form" action="/procesarReserva" method="POST">
+        <form class="check-form" action="/procesarPasarDiaReserva" method="POST">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-sm-6">
                     <div class="check-content">
