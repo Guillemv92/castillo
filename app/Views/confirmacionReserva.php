@@ -61,7 +61,6 @@ include __DIR__ . "/../../templates/navbar.php";
                     <div class="service-faq service-card">
                         <h3 class="service-details-title">Confirmar Reserva</h3>
                         <p>Presiona "Confirmar Reserva" para completar el proceso de reserva de <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $servicio))); ?>.</p>
-                        
                         <!-- Formulario para confirmar la reserva -->
                         <form action="/procesarReserva" method="POST">
                             <input type="hidden" name="servicio" value="<?= htmlspecialchars($servicio); ?>">
@@ -76,9 +75,8 @@ include __DIR__ . "/../../templates/navbar.php";
                             </button>
                         </form>
                     </div>
-
-                   <!-- Sección FAQ -->
-                   <div class="service-faq service-card">
+                    <!-- Sección FAQ -->
+                    <div class="service-faq service-card">
                         <h3 class="service-details-title">FAQ</h3>
                         <div class="faq-area">
                             <div class="questions-bg-area">
