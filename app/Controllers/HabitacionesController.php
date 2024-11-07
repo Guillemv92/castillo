@@ -19,14 +19,16 @@ class HabitacionesController {
     // Procesa los datos del formulario y redirige a la página de disponibilidad
     public function verificarDisponibilidad() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Recoger los datos enviados del formulario
             $fechaEntrada = $_GET['fecha_entrada'];
             $fechaSalida = $_GET['fecha_salida'];
             $adultos = $_GET['adult'];
 
-            // Redirigir a la vista de disponibilidad con parámetros
-            header("Location: /disponibilidad?fecha_entrada=$fechaEntrada&fecha_salida=$fechaSalida&adult=$adultos");
-            exit();
+            // Obtener habitaciones disponibles usando el modelo
+            $habitacionModel = new Habitacion();
+            $habitacionesDisponibles = $habitacionModel->obtenerHabitacionesDisponibles($fechaEntrada, $fechaSalida, $adultos);
+
+            // Pasar habitaciones disponibles a la vista
+            include __DIR__ . '/../Views/disponibilidad.php';
         }
     }
 

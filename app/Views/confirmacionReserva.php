@@ -12,7 +12,7 @@ include __DIR__ . "/../../templates/navbar.php";
         <div class="row">
             <div class="col-lg-8">
                 <div class="service-details-wrap service-right">
-                    <h3><?= ucfirst(str_replace('_', ' ', $servicio)); ?></h3>
+                    <h3><?= $servicio === 'habitacion' ? htmlspecialchars($nombreHabitacion) : ucfirst(str_replace('_', ' ', $servicio)); ?></h3>
                     <p>Detalle del servicio seleccionado: <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $servicio))); ?>. Revisa la información antes de confirmar tu reserva.</p>
                     <div class="service-img-wrap owl-carousel owl-theme mb-30">
                         <div class="single-services-imgs">
@@ -31,7 +31,7 @@ include __DIR__ . "/../../templates/navbar.php";
                         <h3 class="service-details-title">Detalles de la Reserva</h3>
                         <ul>
                             <li>
-                                <strong>Servicio:</strong> <?= ucfirst(str_replace('_', ' ', $servicio)); ?>
+                                <strong>Servicio:</strong> <?= $servicio === 'habitacion' ? htmlspecialchars($nombreHabitacion) : ucfirst(str_replace('_', ' ', $servicio)); ?>
                                 <i class='bx bx-check'></i>
                             </li>
                             <li>
@@ -65,6 +65,7 @@ include __DIR__ . "/../../templates/navbar.php";
                         <!-- Formulario para confirmar la reserva -->
                         <form action="/procesarReserva" method="POST">
                             <input type="hidden" name="servicio" value="<?= htmlspecialchars($servicio); ?>">
+                            <input type="hidden" name="id_habitacion" value="<?= htmlspecialchars($habitacionId ?? ''); ?>">
                             <input type="hidden" name="fecha_entrada" value="<?= htmlspecialchars($fechaEntrada); ?>">
                             <input type="hidden" name="fecha_salida" value="<?= htmlspecialchars($fechaSalida ?? $fechaEntrada); ?>">
                             <input type="hidden" name="adultos" value="<?= htmlspecialchars($adultos); ?>">

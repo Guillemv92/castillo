@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Servicio;
 use App\Models\Reserva;
+use App\Models\Habitacion;
 
 class ConfirmacionController
 {
@@ -16,20 +17,51 @@ class ConfirmacionController
             exit();
         }
     
-        // Verifica los datos recibidos por la URL
-        $servicio = $_GET['servicio'] ?? null;
+        // Obtener datos de la reserva desde la URL
+        $servicio = $_GET['servicio'] ?? '';
         $fechaEntrada = $_GET['fecha_entrada'] ?? null;
-        $adultos = $_GET['adultos'] ?? null;
         $fechaSalida = $_GET['fecha_salida'] ?? null;
-
-        // Continuar con la lógica original de obtener el precio y calcular el costo total
-        $idServicio = $this->obtenerIdServicio($servicio);
-        $servicioModel = new Servicio();
-        $precioUnitario = $servicioModel->obtenerPrecioServicio($idServicio);
-        $costoTotal = $precioUnitario * $adultos;
+        $adultos = $_GET['adultos'] ?? 1;
+        $precioUnitario = 0;
+        $costoTotal = 0;
+        $nombreHabitacion = '';
+    
+        if ($servicio === 'habitacion') {
+            $habitacionId = $_GET['id_habitacion'] ?? null;
+            $habitacionModel = new Habitacion();
+    
+            // Obtener la información de la habitación
+            $habitacion = $habitacionModel->obtenerInfoHabitacion($habitacionId);
+            $precioUnitario = $habitacion['precio'];
+            $nombreHabitacion = $habitacion['nombre'];
+    
+            // Convertir las fechas al formato 'Y-m-d'
+            $fechaEntradaFormato = \DateTime::createFromFormat('d/m/Y', $fechaEntrada);
+            $fechaSalidaFormato = \DateTime::createFromFormat('d/m/Y', $fechaSalida);
+    
+            if (!$fechaEntradaFormato || !$fechaSalidaFormato) {
+                echo "<script>alert('Formato de fecha incorrecto.');</script>";
+                echo "<script>window.location.href = '/';</script>";
+                exit();
+            }
+    
+            // Calcular la diferencia en días
+            $dias = $fechaEntradaFormato->diff($fechaSalidaFormato)->days;
+    
+            // Asegúrate de que al menos sea una noche (1 día)
+            $dias = max(1, $dias);
+            $costoTotal = $precioUnitario * $dias;
+        } else {
+            // Si es otro tipo de servicio
+            $idServicio = $this->obtenerIdServicio($servicio);
+            $servicioModel = new Servicio();
+            $precioUnitario = $servicioModel->obtenerPrecioServicio($idServicio);
+            $costoTotal = $precioUnitario * $adultos;
+        }
     
         include __DIR__ . '/../Views/confirmacionReserva.php';
     }
+    
 
     // Método para procesar la reserva al confirmar
     public function procesarReserva()
