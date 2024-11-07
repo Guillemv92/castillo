@@ -87,6 +87,51 @@ include __DIR__ . "/../../templates/navbar.php";
                             }
                         }).render('#paypal-button-container');
                     </script>
+
+                    <!-- Sección FAQ -->
+                    <div class="service-faq service-card">
+                        <h3 class="service-details-title">FAQ</h3>
+                        <div class="faq-area">
+                            <div class="questions-bg-area">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="faq-accordion">
+                                            <ul class="accordion">
+                                                <li class="accordion-item">
+                                                    <a class="accordion-title " href="javascript:void(0)">
+                                                        <i class='bx bx-chevron-down'></i>
+                                                        ¿La recepción está abierta las 24 horas?
+                                                    </a>
+                                                    <p class="accordion-content">Nuestra recepción está abierta todo el día para su comodidad.</p>
+                                                </li>
+                                                <li class="accordion-item">
+                                                    <a class="accordion-title" href="javascript:void(0)">
+                                                        <i class='bx bx-chevron-down'></i>
+                                                        ¿Puedo dejar mi equipaje?
+                                                    </a>
+                                                    <p class="accordion-content">Sí, disponemos de servicio de guarda equipajes para nuestros huéspedes.</p>
+                                                </li>
+                                                <li class="accordion-item">
+                                                    <a class="accordion-title" href="javascript:void(0)">
+                                                        <i class='bx bx-chevron-down'></i>
+                                                        ¿Cuál es el aeropuerto más cercano?
+                                                    </a>
+                                                    <p class="accordion-content">El aeropuerto más cercano está a 20 minutos en coche.</p>
+                                                </li>
+                                                <li class="accordion-item">
+                                                    <a class="accordion-title" href="javascript:void(0)">
+                                                        <i class='bx bx-chevron-down'></i>
+                                                        ¿Puedo alquilar un coche en el hotel o cerca?
+                                                    </a>
+                                                    <p class="accordion-content">Sí, hay opciones de alquiler de coches en el hotel y en las inmediaciones.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Información de Contacto -->
                     <div class="service-list service-card">
                         <h3 class="service-details-title">Contact Info</h3>
