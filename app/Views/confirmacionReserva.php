@@ -1,10 +1,9 @@
 <?php
 session_start();
-
 include __DIR__ . "/../../templates/navbar.php";
-
 // Los datos ya están disponibles gracias al controlador
 ?>
+<script src="https://www.paypal.com/sdk/js?client-id=AWWwTnNeFDYSmO5RSMRrIaLngQtP5cFnOaw7try4Un6Rvv9AYSS5PlEpN22pRKZDZ_zyL37humBZ7bhw&currency=USD"></script>
 
 <!-- Start Service Details Area -->
 <section class="service-details-area room-details-right-sidebar ptb-100">
@@ -49,77 +48,45 @@ include __DIR__ . "/../../templates/navbar.php";
                                 <i class='bx bx-check'></i>
                             </li>
                             <li>
-                                <strong>Precio Unitario:</strong> Gs. <?= number_format($precioUnitario, 3, ',', '.'); ?>
+                                <strong>Precio Unitario:</strong> Gs. <?= number_format($precioUnitario, 0, ',', '.'); ?>
                                 <i class='bx bx-check'></i>
                             </li>
                             <li>
-                                <strong>Precio Total:</strong> Gs. <?= number_format($costoTotal, 3, ',', '.'); ?>
+                                <strong>Precio Total:</strong> Gs. <?= number_format($costoTotal, 0, ',', '.'); ?>
                                 <i class='bx bx-check'></i>
                             </li>
                         </ul>
                     </div>
-                    <div class="service-faq service-card">
-                        <h3 class="service-details-title">Confirmar Reserva</h3>
-                        <p>Presiona "Confirmar Reserva" para completar el proceso de reserva de <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $servicio))); ?>.</p>
-                        <!-- Formulario para confirmar la reserva -->
-                        <form action="/procesarReserva" method="POST">
-                            <input type="hidden" name="servicio" value="<?= htmlspecialchars($servicio); ?>">
-                            <input type="hidden" name="id_habitacion" value="<?= htmlspecialchars($habitacionId ?? ''); ?>">
-                            <input type="hidden" name="fecha_entrada" value="<?= htmlspecialchars($fechaEntrada); ?>">
-                            <input type="hidden" name="fecha_salida" value="<?= htmlspecialchars($fechaSalida ?? $fechaEntrada); ?>">
-                            <input type="hidden" name="adultos" value="<?= htmlspecialchars($adultos); ?>">
-                            <input type="hidden" name="precio_total" value="<?= htmlspecialchars($costoTotal); ?>">
-                            <button type="submit" class="default-btn">
-                                Confirmar Reserva
-                                <i class="flaticon-right"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <!-- Sección FAQ -->
-                    <div class="service-faq service-card">
-                        <h3 class="service-details-title">FAQ</h3>
-                        <div class="faq-area">
-                            <div class="questions-bg-area">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="faq-accordion">
-                                            <ul class="accordion">
-                                                <li class="accordion-item">
-                                                    <a class="accordion-title " href="javascript:void(0)">
-                                                        <i class='bx bx-chevron-down'></i>
-                                                        Is Reception Open 24 Hours?
-                                                    </a>
-                                                    <p class="accordion-content">Lorem ipsum dolor sit amet.</p>
-                                                </li>
-                                                <li class="accordion-item">
-                                                    <a class="accordion-title" href="javascript:void(0)">
-                                                        <i class='bx bx-chevron-down'></i>
-                                                        Can I Leave My Luggage?
-                                                    </a>
-                                                    <p class="accordion-content">Lorem ipsum dolor sit amet.</p>
-                                                </li>
-                                                <li class="accordion-item">
-                                                    <a class="accordion-title" href="javascript:void(0)">
-                                                        <i class='bx bx-chevron-down'></i>
-                                                        Which One Is The Nearest Airport?
-                                                    </a>
-                                                    <p class="accordion-content">Lorem ipsum dolor sit amet.</p>
-                                                </li>
-                                                <li class="accordion-item">
-                                                    <a class="accordion-title" href="javascript:void(0)">
-                                                        <i class='bx bx-chevron-down'></i>
-                                                        Can I Rent A Car At The Hotel Nearby?
-                                                    </a>
-                                                    <p class="accordion-content">Lorem ipsum dolor sit amet.</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                    <!-- Botón de pago de PayPal -->
+                    <div id="paypal-button-container"></div>
+
+                    <!-- Script para manejar el botón de PayPal -->
+                    <script>
+                        const guaraniAmount = <?= json_encode($costoTotal); ?>; // Precio total en guaraníes como entero
+                        // Conversión de guaraníes a dólares
+                        const conversionRate = 1 / 7300; // Ajusta según la tasa actual
+                        paypal.Buttons({
+                            createOrder: function(data, actions) {
+                                const usdAmount = (guaraniAmount * conversionRate).toFixed(2);
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: usdAmount,
+                                            currency_code: 'USD'
+                                        }
+                                    }]
+                                });
+                            },
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    alert('Pago completado con éxito');
+                                    // Redirigir a procesar la reserva con el ID de pago y datos de la reserva
+                                    window.location.href = `/procesarReserva?paymentId=${data.orderID}&servicio=${encodeURIComponent(<?= json_encode($servicio) ?>)}&id_habitacion=${encodeURIComponent(<?= json_encode($habitacionId ?? '') ?>)}&fecha_entrada=${encodeURIComponent(<?= json_encode($fechaEntrada) ?>)}&fecha_salida=${encodeURIComponent(<?= json_encode($fechaSalida) ?>)}&adultos=${encodeURIComponent(<?= json_encode($adultos) ?>)}&precio_total=${encodeURIComponent(<?= json_encode($costoTotal) ?>)}`;
+                                });
+                            }
+                        }).render('#paypal-button-container');
+                    </script>
                     <!-- Información de Contacto -->
                     <div class="service-list service-card">
                         <h3 class="service-details-title">Contact Info</h3>

@@ -47,7 +47,13 @@ if ($url == '/' || $url == '/index.php') {
 } elseif ($url == '/procesarPasarDiaReserva') {
     $pasareldiaController->procesarReserva(); // Procesar la reserva
 }elseif ($url == '/procesarReserva') {
-    $confirmacionController->procesarReserva(); // Procesar la reserva
+    // Asegúrate de capturar GET y POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['paymentId'])) {
+        $confirmacionController->procesarReserva();
+    } else {
+        http_response_code(405); // Método no permitido
+        echo "Método no permitido";
+    }
 }
 
 // Rutas para el carrito
