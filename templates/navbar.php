@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 	<!-- Bootstrap Min CSS -->
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-	<!--este para mi que esta al pedo Owl Theme Default Min CSS -->
+	<!--Owl Theme Default Min CSS -->
 	<link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
 	<!-- Owl Carousel Min CSS -->
 	<link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
@@ -29,8 +29,6 @@ if (session_status() === PHP_SESSION_NONE) {
 	<link rel="stylesheet" href="../assets/css/nice-select.min.css">
 	<!-- Odometer Min CSS -->
 	<link rel="stylesheet" href="../assets/css/odometer.min.css">
-	<!-- Date Picker CSS-->
-	<link rel="stylesheet" href="../assets/css/date-picker.min.css">
 	<!-- Magnific Popup Min CSS -->
 	<link rel="stylesheet" href="../assets/css/magnific-popup.min.css">
 	<!-- Beautiful Fonts CSS -->
