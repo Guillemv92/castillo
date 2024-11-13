@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 class HabitacionesController {
     // Muestra el formulario para verificar disponibilidad de habitaciones
     public function mostrarFormulario() {
@@ -16,21 +17,6 @@ class HabitacionesController {
         include_once __DIR__ . '/../Views/habitaciones.php';
     }
 
-    // Procesa los datos del formulario y redirige a la página de disponibilidad
-    public function verificarDisponibilidad() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $fechaEntrada = $_GET['fecha_entrada'];
-            $fechaSalida = $_GET['fecha_salida'];
-            $adultos = $_GET['adult'];
-
-            // Obtener habitaciones disponibles usando el modelo
-            $habitacionModel = new Habitacion();
-            $habitacionesDisponibles = $habitacionModel->obtenerHabitacionesDisponibles($fechaEntrada, $fechaSalida, $adultos);
-
-            // Pasar habitaciones disponibles a la vista
-            include __DIR__ . '/../Views/disponibilidad.php';
-        }
-    }
 
     public function agregarAlCarrito() {
         // Obtener datos de la reserva de habitación

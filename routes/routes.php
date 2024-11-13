@@ -5,7 +5,7 @@ use App\Controllers\PasareldiaController;
 use App\Controllers\HabitacionesController;
 use App\Controllers\DisponibilidadController;
 use App\Controllers\CampingController;
-use App\Controllers\ConfirmacionController; // Importar el nuevo controlador
+use App\Controllers\ConfirmacionController;
 
 // Instanciar los controladores
 $authController = new AuthController();
@@ -13,7 +13,7 @@ $pasareldiaController = new PasareldiaController();
 $habitacionesController = new HabitacionesController();
 $disponibilidadController = new DisponibilidadController();
 $campingController = new CampingController();
-$confirmacionController = new ConfirmacionController(); // Instanciar el controlador de confirmación
+$confirmacionController = new ConfirmacionController();
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -26,8 +26,10 @@ if ($url == '/' || $url == '/index.php') {
     $pasareldiaController->mostrarFormulario();
 } elseif ($url == '/habitaciones') {
     $habitacionesController->mostrarFormulario();
+} elseif ($url == '/verificarDisponibilidad') {
+    $disponibilidadController->verificarDisponibilidadAjax(); // AJAX para actualizar habitaciones
 } elseif ($url == '/disponibilidad') {
-    $disponibilidadController->verificarDisponibilidad();
+    $disponibilidadController->verificarDisponibilidad(); // Muestra la página completa de disponibilidad
 } elseif ($url == '/camping') {
     $campingController->mostrarFormulario();
 } elseif ($url == '/procesarCampingReserva') {
@@ -43,15 +45,14 @@ if ($url == '/' || $url == '/index.php') {
 } elseif ($url == '/procesarRegistro') {
     $authController->procesarRegistro();
 } elseif ($url == '/confirmacionReserva') {
-    $confirmacionController->mostrarConfirmacion(); // Llamada al método para mostrar la confirmación
+    $confirmacionController->mostrarConfirmacion(); 
 } elseif ($url == '/procesarPasarDiaReserva') {
-    $pasareldiaController->procesarReserva(); // Procesar la reserva
-}elseif ($url == '/procesarReserva') {
-    // Asegúrate de capturar GET y POST
+    $pasareldiaController->procesarReserva();
+} elseif ($url == '/procesarReserva') {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['paymentId'])) {
         $confirmacionController->procesarReserva();
     } else {
-        http_response_code(405); // Método no permitido
+        http_response_code(405);
         echo "Método no permitido";
     }
 }
