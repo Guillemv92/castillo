@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="white-shape">
-				<img src="../assets/img/home-one/slider/white-shape.png" alt="Image">
+				<img src="../../assets/img/otros/white-shape.png" alt="Image">
 			</div>
 
 		</section>
@@ -73,7 +73,7 @@
 		<div class="row align-items-center">
 			<div class="col-lg-6">
 				<div class="explore-img">
-					<img src="assets/img/foto-castillo3.jpg" alt="Image">
+					<img src="../../assets/img/otros/foto-castillo3.jpg" alt="Image">
 				</div>
 			</div>
 			<div class="col-lg-6">
@@ -107,28 +107,28 @@
 				<div class="col-lg-4">
 					<ul class="tabs">
 						<li class="single-rooms" id="room1">
-							<img src="assets/img/matri-1.jpg" alt="Image">
+							<img src="../../assets/img/habitaciones/matri-1.jpg" alt="Image">
 							<div class="room-content">
 								<h3>Habitacion matrimonial</h3>
 								<span>From $75.9/night</span>
 							</div>
 						</li>
 						<li class="single-rooms" id="room2">
-							<img src="assets/img/matri-2.jpg" alt="Image">
+							<img src="../../assets/img/habitaciones/matri-2.jpg" alt="Image">
 							<div class="room-content">
 								<h3>Habitacion matrimonial 2</h3>
 								<span>From $50.9/night</span>
 							</div>
 						</li>
 						<li class="single-rooms" id="room3">
-							<img src="assets/img/triple-1.jpg" alt="Image">
+							<img src="../../assets/img/habitaciones/triple-1.jpg" alt="Image">
 							<div class="room-content">
 								<h3>Habitacion triple/h3>
 									<span>From $70.9/night</span>
 							</div>
 						</li>
 						<li class="single-rooms" id="room4">
-							<img src="assets/img/rooms/button-img-5.jpg" alt="Image">
+							<img src="../../assets/img/habitaciones/matri-1.jpg" alt="Image">
 							<div class="room-content">
 								<h3>Budget Room</h3>
 								<span>From $95.9/night</span>
@@ -140,32 +140,32 @@
 					<div class="tab_content">
 						<div class="tabs_item">
 							<div class="our-rooms-single-img room-bg-1">
-								<img id="main-room-image" src="assets/img/matri-1.jpg" alt="Main Image" style="width: 100%; height: auto;">
+								<img id="main-room-image" src="../../assets/img/habitaciones/matri-1.jpg" alt="Main Image" style="width: 100%; height: auto;">
 							</div>
-							<span class="preview-item">The Preview Of Double Room</span>
+							
 						</div>
 
 
 						<div class="tabs_item">
 							<div class="our-rooms-single-img room-bg-2">
-								<img id="main-room-image" src="assets/img/matri-2.jpg" alt="Main Image" style="width: 100%; height: auto;">
+								<img id="main-room-image" src="../../assets/img/habitaciones/matri-2.jpg" alt="Main Image" style="width: 100%; height: auto;">
 							</div>
-							<span class="preview-item">The Preview Of Luxury Room</span>
+							
 						</div>
 
 
 						<div class="tabs_item">
 							<div class="our-rooms-single-img room-bg-3">
-								<img id="main-room-image" src="assets/img/triple-1.jpg" alt="Main Image" style="width: 100%; height: auto;">
+								<img id="main-room-image" src="../../assets/img/habitaciones/triple-1.jpg" alt="Main Image" style="width: 100%; height: auto;">
 							</div>
-							<span class="preview-item">The Preview Of Best Room</span>
+							
 						</div>
 
 
 						<div class="tabs_item">
 							<div class="our-rooms-single-img room-bg-4">
 							</div>
-							<span class="preview-item">The Preview Of Classic Room</span>
+							
 						</div>
 
 
@@ -208,7 +208,6 @@
 				<h3>Excellent Room</h3>
 				<p>“Awesome yksum dolor sit ametco elit, sed do eiusmod tempor incididunt et md do eiusmoeiusmod tempor inte emamnsecacing eiusmoeiusmod”</p>
 				<div class="testimonials-content">
-					<img src="assets/img/testimonials/2.jpg" alt="Image">
 					<h4>Ayman Jenis</h4>
 					<span>CEO@Leasuely</span>
 				</div>
@@ -234,7 +233,6 @@
 				<h3>Excellent hotel</h3>
 				<p>“Awesome yksum dolor sit ametco elit, sed do eiusmod tempor incididunt et md do eiusmoeiusmod tempor inte emamnsecacing eiusmoeiusmod”</p>
 				<div class="testimonials-content">
-					<img src="assets/img/testimonials/3.jpg" alt="Image">
 					<h4>Ayman Jenis</h4>
 					<span>CEO@Leasuely</span>
 				</div>
@@ -260,7 +258,6 @@
 				<h3>Excellent Swimming</h3>
 				<p>“Awesome yksum dolor sit ametco elit, sed do eiusmod tempor incididunt et md do eiusmoeiusmod tempor inte emamnsecacing eiusmoeiusmod”</p>
 				<div class="testimonials-content">
-					<img src="assets/img/testimonials/1.jpg" alt="Image">
 					<h4>Ayman Jenis</h4>
 					<span>CEO@Leasuely</span>
 				</div>

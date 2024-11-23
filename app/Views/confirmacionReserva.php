@@ -12,15 +12,10 @@ include __DIR__ . "/../../templates/navbar.php";
             <div class="col-lg-8">
                 <div class="service-details-wrap service-right">
                     <h3><?= $servicio === 'habitacion' ? htmlspecialchars($nombreHabitacion) : ucfirst(str_replace('_', ' ', $servicio)); ?></h3>
-                    <p>Detalle del servicio seleccionado: <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $servicio))); ?>. Revisa la información antes de confirmar tu reserva.</p>
-                    <div class="service-img-wrap owl-carousel owl-theme mb-30">
-                        <div class="single-services-imgs">
-                            <img src="../assets/img/services-details/2.jpg" alt="Imagen del servicio">
-                        </div>
-                        <div class="single-services-imgs">
-                            <img src="../assets/img/services-details/2.jpg" alt="Image">
-                        </div>
-                    </div>
+                    <p><strong></strong> <?= htmlspecialchars($descripcion) ?></p>
+                    <img class="imagen-servicio" src="<?= htmlspecialchars($imagen) ?>" alt="<?= htmlspecialchars($nombre) ?>">
+
+
                 </div>
             </div>
 
@@ -132,32 +127,7 @@ include __DIR__ . "/../../templates/navbar.php";
                             </div>
                         </div>
                     </div>
-                    <!-- Información de Contacto -->
-                    <div class="service-list service-card">
-                        <h3 class="service-details-title">Contact Info</h3>
-                        <ul>
-                            <li>
-                                <a href="tel:+8006036035">
-                                    +800 603 6035
-                                    <i class='bx bx-phone-call bx-rotate-270'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="mailto:hello@ecorik.com">
-                                    hello@ecorik.com
-                                    <i class='bx bx-envelope'></i>
-                                </a>
-                            </li>
-                            <li>
-                                123, Western Road, Australia
-                                <i class='bx bx-location-plus'></i>
-                            </li>
-                            <li>
-                                9:00 AM – 8:00 PM
-                                <i class="bx bx-time"></i>
-                            </li>
-                        </ul>
-                    </div>
+                    
                 </div>
             </div>
         </div>

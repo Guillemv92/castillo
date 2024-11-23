@@ -4,10 +4,7 @@
             <div class="col-lg-6 col-md-6">
                 <div class="single-news">
                     <div class="news-img">
-                        <img src="/assets/img/<?= htmlspecialchars($habitacion['nombre']); ?>-disponibilidad.jpg" alt="Image">
-                        <div class="dates">
-                            <span>Gs. <?= htmlspecialchars($habitacion['precio']); ?></span>
-                        </div>
+                        <img src="/assets/img/habitaciones/<?= htmlspecialchars($habitacion['nombre']); ?>-disponibilidad.jpg" alt="Image">
                     </div>
                     <div class="news-content-wrap">
                         <h3><?= htmlspecialchars($habitacion['nombre']); ?></h3>

@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="white-shape">
-        <img src="../assets/img/home-one/slider/white-shape.png" alt="Image">
+        <img src="../../assets/img/otros/white-shape.png" alt="Image">
     </div>
 </section>
 

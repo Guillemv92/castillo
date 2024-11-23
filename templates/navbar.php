@@ -46,7 +46,7 @@ if (session_status() === PHP_SESSION_NONE) {
 	<!-- Flatpickr JS -->
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="../assets/img/logooooo.jpg">
+	<link rel="icon" type="image/png" href="/public/assets/img/templates/logo2.png">
 
 	<!-- TITLE -->
 	<title>Castillo</title>
@@ -69,7 +69,7 @@ if (session_status() === PHP_SESSION_NONE) {
 				<nav class="navbar navbar-expand-md navbar-light">
 					<div class="container">
 						<a class="navbar-brand" href="/index.php">
-							<img src="/assets/img/logo2.png" alt="Logo" style="width: 140px; height:60px;">
+							<img src="/assets/img/templates/logo2.png" alt="Logo" style="width: 140px; height:60px;">
 						</a>
 						<div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 							<ul class="navbar-nav m-auto">

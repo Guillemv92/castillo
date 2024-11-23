@@ -8,7 +8,9 @@ use App\Models\Habitacion;
 
 class ConfirmacionController
 {
-    public function mostrarConfirmacion() {
+    public function mostrarConfirmacion()
+    {
+        /*
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -16,7 +18,7 @@ class ConfirmacionController
             header("Location: /login");
             exit();
         }
-    
+        */
         // Obtener datos de la reserva desde la URL
         $servicio = $_GET['servicio'] ?? '';
         $fechaEntrada = $_GET['fecha_entrada'] ?? null;
@@ -24,30 +26,34 @@ class ConfirmacionController
         $adultos = $_GET['adultos'] ?? 1;
         $precioUnitario = 0;
         $costoTotal = 0;
-        $nombreHabitacion = '';
-    
+        $nombre = '';
+        $descripcion = '';
+        $imagen = '';
+
         if ($servicio === 'habitacion') {
             $habitacionId = $_GET['id_habitacion'] ?? null;
             $habitacionModel = new Habitacion();
-    
+
             // Obtener la información de la habitación
             $habitacion = $habitacionModel->obtenerInfoHabitacion($habitacionId);
             $precioUnitario = (int) $habitacion['precio']; // Asegurar que sea un entero
-            $nombreHabitacion = $habitacion['nombre'];
-    
+            $nombre = $habitacion['nombre'];
+            $descripcion = $habitacion['descripcion']; // Nueva descripción
+            $imagen = $habitacion['imagen']; // Nueva imagen
+
             // Convertir las fechas al formato 'Y-m-d'
             $fechaEntradaFormato = \DateTime::createFromFormat('d/m/Y', $fechaEntrada);
             $fechaSalidaFormato = \DateTime::createFromFormat('d/m/Y', $fechaSalida);
-    
+
             if (!$fechaEntradaFormato || !$fechaSalidaFormato) {
                 echo "<script>alert('Formato de fecha incorrecto.');</script>";
                 echo "<script>window.location.href = '/';</script>";
                 exit();
             }
-    
+
             // Calcular la diferencia en días
             $dias = $fechaEntradaFormato->diff($fechaSalidaFormato)->days;
-    
+
             // Asegúrate de que al menos sea una noche (1 día)
             $dias = max(1, $dias);
             $costoTotal = $precioUnitario * $dias; // Calcular como entero
@@ -55,13 +61,19 @@ class ConfirmacionController
             // Si es otro tipo de servicio
             $idServicio = $this->obtenerIdServicio($servicio);
             $servicioModel = new Servicio();
-            $precioUnitario = (int) $servicioModel->obtenerPrecioServicio($idServicio); // Asegurar que sea entero
+
+            // Obtener la información del servicio
+            $detalleServicio = $servicioModel->obtenerInfoServicio($idServicio);
+            $precioUnitario = (int) $detalleServicio['precio']; // Asegurar que sea entero
+            $nombre = $detalleServicio['nombre'];
+            $descripcion = $detalleServicio['descripcion']; // Nueva descripción
+            $imagen = $detalleServicio['imagen']; // Nueva imagen
             $costoTotal = $precioUnitario * $adultos;
         }
-    
+
+        // Incluir la vista de confirmación con los datos necesarios
         include __DIR__ . '/../Views/confirmacionReserva.php';
     }
-    
 
     // Método para procesar la reserva al confirmar
     public function procesarReserva()
@@ -72,7 +84,7 @@ class ConfirmacionController
                 header("Location: /login");
                 exit();
             }
-    
+
             // Recoger los datos de la reserva desde los parámetros GET
             $servicio = $_GET['servicio'] ?? null;
             $idHabitacion = $_GET['id_habitacion'] ?? null;
@@ -80,14 +92,14 @@ class ConfirmacionController
             $fechaSalida = $_GET['fecha_salida'] ?? null;
             $adultos = $_GET['adultos'] ?? null;
             $precioTotal = $_GET['precio_total'] ?? null;
-    
+
             // Verificar que todos los datos necesarios están presentes
             if ($servicio && $fechaEntrada && $fechaSalida && $adultos && $precioTotal) {
                 $idPersona = $_SESSION['user']['id'];
                 $reservaModel = new Reserva();
                 $estado = 1;
                 $servicios = $habitaciones = [];
-    
+
                 if ($servicio === 'habitacion') {
                     $habitaciones[] = [
                         'id_habitacion' => $idHabitacion,
@@ -103,7 +115,7 @@ class ConfirmacionController
                         'fecha_fin' => $fechaSalida,
                     ];
                 }
-    
+
                 try {
                     $idReserva = $reservaModel->guardarReserva($idPersona, $estado, $servicios, $habitaciones);
                     echo "<script>alert('Reserva confirmada con éxito');</script>";

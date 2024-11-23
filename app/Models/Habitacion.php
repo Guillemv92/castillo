@@ -31,12 +31,12 @@ class Habitacion {
     public function obtenerInfoHabitacion($habitacionId) {
         $db = new Database();
         $conn = $db->getConnection();
-
-        $query = "SELECT nombre, precio FROM habitaciones WHERE id_habitacion = :id";
+    
+        $query = "SELECT nombre, precio, descripcion, imagen FROM habitaciones WHERE id_habitacion = :id";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':id', $habitacionId);
         $stmt->execute();
-
+    
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

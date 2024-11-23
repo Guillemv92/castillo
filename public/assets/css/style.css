@@ -1244,15 +1244,15 @@ Eorik SliderArea Style CARRUSEL DEL INICIO
 }
 
 .slider-item-bg-1 {
-  background-image: url(../img/home-one/slider/slider-img-3.jpg);
+  background-image: url(../img/otros/slider-img-3.jpg);
 }
 
 .slider-item-bg-2 {
-  background-image: url(../img/home-one/slider/PRUEBA-PASAR.jpg);
+  background-image: url(../img/otros/PRUEBA-PASAR.jpg);
 }
 
 .slider-item-bg-3 {
-  background-image: url(../img/home-one/slider/PRUEBA-CAMPING.jpg);
+  background-image: url(../img/otros/PRUEBA-CAMPING.jpg);
 }
 
 /*
@@ -1703,28 +1703,21 @@ Rooms Area Style esto es de las piezas de la pagina del inicio (falta cambiar al
 }
 
 .our-rooms-single-img.room-bg-1 {
-  background-image: url(../../assets/img/rooms/rooms-1.jpg);
+  background-image: url(../img/habitaciones/matri-1.jpg);
 }
 
 .our-rooms-single-img.room-bg-2 {
-  background-image: url(../../assets/img/rooms/rooms-2.jpg);
+  background-image: url(../img/habitaciones/matri-2.jpg);
 }
 
 .our-rooms-single-img.room-bg-3 {
-  background-image: url(../../assets/img/rooms/rooms-3.jpg);
+  background-image: url(../img/habitaciones/triple-1.jpg);
 }
 
 .our-rooms-single-img.room-bg-4 {
   background-image: url(../../assets/img/rooms/rooms-4.jpg);
 }
 
-.our-rooms-single-img.room-bg-5 {
-  background-image: url(../../assets/img/rooms/rooms-5.jpg);
-}
-
-.our-rooms-single-img.room-bg-6 {
-  background-image: url(../../assets/img/rooms/rooms-1.jpg);
-}
 
 .tab .tabs_item {
   display: none;
@@ -1743,7 +1736,6 @@ Testimonials Area Style
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
-  background-image: url(../../assets/img/testimonials/testimonials-bg.png);
   padding: 30px;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -1915,7 +1907,7 @@ Footer Top Area Style
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
-  background-image: url(../../assets/img/footer-bg.jpg);
+  background-image: url(../img/templates/footer-background-01.jpg);
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -2735,8 +2727,6 @@ Service Details Area Style   confirmacion.php
   margin-left: 15px;
 }
 
-FAQ CSS
-======================================================*/
 .faq-accordion .accordion {
   list-style-type: none;
   padding-left: 0;
@@ -3069,4 +3059,14 @@ Cart Area Style
   font-size: 24px;
   text-align: center;
   position: relative;
+}
+
+.imagen-servicio {
+  max-width: 100%; /* La imagen no será más ancha que su contenedor */
+  width: 700px; /* Ajusta este valor para controlar el tamaño */
+  height: 900px; /* Mantiene la proporción de la imagen */
+  border: 4px solid #ddd; /* Borde gris claro */
+  border-radius: 10px; /* Esquinas redondeadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para un efecto elegante */
+  margin: 15px 0; /* Espaciado alrededor de la imagen */
 }

@@ -44,15 +44,15 @@ class Servicio {
     }
 
     // Obtiene el precio de un servicio según su ID
-    public function obtenerPrecioServicio($idServicio) {
+    public function obtenerInfoServicio($idServicio) {
         $db = new Database();
         $conn = $db->getConnection();
-
-        $query = "SELECT precio FROM servicios WHERE id_servicio = :idServicio AND estado = 'A'";
+    
+        $query = "SELECT nombre, precio, descripcion, imagen FROM servicios WHERE id_servicio = :idServicio AND estado = 'A'";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':idServicio', $idServicio);
         $stmt->execute();
-
-        return $stmt->fetchColumn();
+    
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
