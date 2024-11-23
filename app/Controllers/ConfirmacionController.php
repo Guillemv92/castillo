@@ -10,41 +10,76 @@ use App\Helpers\EmailHelper;
 class ConfirmacionController
 {
     public function mostrarConfirmacion()
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Obtener datos de la reserva desde la URL
+    $servicio = $_GET['servicio'] ?? '';
+    $fechaEntrada = $_GET['fecha_entrada'] ?? null;
+    $fechaSalida = $_GET['fecha_salida'] ?? null;
+    $adultos = $_GET['adultos'] ?? 1;
+    $precioUnitario = 0;
+    $costoTotal = 0;
+    $nombre = '';
+    $descripcion = '';
+    $imagen = '';
+    $cotizacionDolar = 7300; // Valor por defecto
+    $resenhas = []; // Inicializamos el array de reseñas
+
+    try {
+        // Llamar a la función para obtener la cotización del dólar
+        $cotizacionDolar = $this->obtenerCotizacionDolar();
+    } catch (\Exception $e) {
+        // Si falla la cotización, usar un valor predeterminado
+        echo "<script>alert('No se pudo obtener la cotización actual del dólar, usando valor predeterminado.');</script>";
+    }
+
+    if ($servicio === 'habitacion') {
+        $habitacionId = $_GET['id_habitacion'] ?? null;
+        $habitacionModel = new Habitacion();
+
+        // Obtener la información de la habitación
+        $habitacion = $habitacionModel->obtenerInfoHabitacion($habitacionId);
+        $precioUnitario = (int) $habitacion['precio'];
+        $nombre = $habitacion['nombre'];
+        $descripcion = $habitacion['descripcion'];
+        $imagen = $habitacion['imagen'];
+
+        // Convertir las fechas al formato 'Y-m-d'
+        $fechaEntradaFormato = \DateTime::createFromFormat('d/m/Y', $fechaEntrada);
+        $fechaSalidaFormato = \DateTime::createFromFormat('d/m/Y', $fechaSalida);
+
+        if (!$fechaEntradaFormato || !$fechaSalidaFormato) {
+            echo "<script>alert('Formato de fecha incorrecto.');</script>";
+            echo "<script>window.location.href = '/';</script>";
+            exit();
         }
-        // Obtener datos de la reserva desde la URL
-        $servicio = $_GET['servicio'] ?? '';
-        $fechaEntrada = $_GET['fecha_entrada'] ?? null;
-        $fechaSalida = $_GET['fecha_salida'] ?? null;
-        $adultos = $_GET['adultos'] ?? 1;
-        $precioUnitario = 0;
-        $costoTotal = 0;
-        $nombre = '';
-        $descripcion = '';
-        $imagen = '';
-        $cotizacionDolar = 7300; // Valor por defecto
 
-        try {
-            // Llamar a la función para obtener la cotización del dólar
-            $cotizacionDolar = $this->obtenerCotizacionDolar();
-        } catch (\Exception $e) {
-            // Si falla la cotización, usar un valor predeterminado
-            echo "<script>alert('No se pudo obtener la cotización actual del dólar, usando valor predeterminado.');</script>";
-        }
+        // Calcular la diferencia en días
+        $dias = $fechaEntradaFormato->diff($fechaSalidaFormato)->days;
 
-        if ($servicio === 'habitacion') {
-            $habitacionId = $_GET['id_habitacion'] ?? null;
-            $habitacionModel = new Habitacion();
+        // Asegúrate de que al menos sea una noche (1 día)
+        $dias = max(1, $dias);
+        $costoTotal = $precioUnitario * $dias;
 
-            // Obtener la información de la habitación
-            $habitacion = $habitacionModel->obtenerInfoHabitacion($habitacionId);
-            $precioUnitario = (int) $habitacion['precio'];
-            $nombre = $habitacion['nombre'];
-            $descripcion = $habitacion['descripcion'];
-            $imagen = $habitacion['imagen'];
+        // Obtener las reseñas de la habitación
+        $resenhaModel = new \App\Models\Resenha();
+        $resenhas = $resenhaModel->obtenerResenhas(null, $habitacionId); // Pasamos el idHabitacion
+    } else {
+        // Si es otro tipo de servicio
+        $idServicio = $this->obtenerIdServicio($servicio);
+        $servicioModel = new Servicio();
 
+        // Obtener la información del servicio
+        $detalleServicio = $servicioModel->obtenerInfoServicio($idServicio);
+        $precioUnitario = (int) $detalleServicio['precio'];
+        $nombre = $detalleServicio['nombre'];
+        $descripcion = $detalleServicio['descripcion'];
+        $imagen = $detalleServicio['imagen'];
+
+        if ($servicio === 'camping') {
             // Convertir las fechas al formato 'Y-m-d'
             $fechaEntradaFormato = \DateTime::createFromFormat('d/m/Y', $fechaEntrada);
             $fechaSalidaFormato = \DateTime::createFromFormat('d/m/Y', $fechaSalida);
@@ -60,57 +95,32 @@ class ConfirmacionController
 
             // Asegúrate de que al menos sea una noche (1 día)
             $dias = max(1, $dias);
-            $costoTotal = $precioUnitario * $dias;
+            $costoTotal = $precioUnitario * $adultos * $dias;
         } else {
-            // Si es otro tipo de servicio
-            $idServicio = $this->obtenerIdServicio($servicio);
-            $servicioModel = new Servicio();
-
-            // Obtener la información del servicio
-            $detalleServicio = $servicioModel->obtenerInfoServicio($idServicio);
-            $precioUnitario = (int) $detalleServicio['precio'];
-            $nombre = $detalleServicio['nombre'];
-            $descripcion = $detalleServicio['descripcion'];
-            $imagen = $detalleServicio['imagen'];
-
-            if ($servicio === 'camping') {
-                // Convertir las fechas al formato 'Y-m-d'
-                $fechaEntradaFormato = \DateTime::createFromFormat('d/m/Y', $fechaEntrada);
-                $fechaSalidaFormato = \DateTime::createFromFormat('d/m/Y', $fechaSalida);
-
-                if (!$fechaEntradaFormato || !$fechaSalidaFormato) {
-                    echo "<script>alert('Formato de fecha incorrecto.');</script>";
-                    echo "<script>window.location.href = '/';</script>";
-                    exit();
-                }
-
-                // Calcular la diferencia en días
-                $dias = $fechaEntradaFormato->diff($fechaSalidaFormato)->days;
-
-                // Asegúrate de que al menos sea una noche (1 día)
-                $dias = max(1, $dias);
-                $costoTotal = $precioUnitario * $adultos * $dias;
-            } else {
-                // Otros servicios (como pasar el día)
-                $costoTotal = $precioUnitario * $adultos;
-            }
+            // Otros servicios (como pasar el día)
+            $costoTotal = $precioUnitario * $adultos;
         }
 
-        // Convertir el precio a dólares usando la cotización obtenida
-        $precioEnDolares = round($costoTotal / $cotizacionDolar, 2);
-
-        $_SESSION['reserva'] = [
-            'servicio' => $servicio,
-            'id_habitacion' => $habitacionId ?? null,
-            'fecha_entrada' => $fechaEntrada,
-            'fecha_salida' => $fechaSalida,
-            'adultos' => $adultos,
-            'precio_total' => $costoTotal,
-        ];
-
-        // Incluir la vista de confirmación con los datos necesarios
-        include __DIR__ . '/../Views/confirmacionReserva.php';
+        // Obtener las reseñas del servicio
+        $resenhaModel = new \App\Models\Resenha();
+        $resenhas = $resenhaModel->obtenerResenhas($idServicio, null); // Pasamos el idServicio
     }
+
+    // Convertir el precio a dólares usando la cotización obtenida
+    $precioEnDolares = round($costoTotal / $cotizacionDolar, 2);
+
+    $_SESSION['reserva'] = [
+        'servicio' => $servicio,
+        'id_habitacion' => $habitacionId ?? null,
+        'fecha_entrada' => $fechaEntrada,
+        'fecha_salida' => $fechaSalida,
+        'adultos' => $adultos,
+        'precio_total' => $costoTotal,
+    ];
+
+    // Incluir la vista de confirmación con los datos necesarios
+    include __DIR__ . '/../Views/confirmacionReserva.php';
+}
 
     public function obtenerCotizacionDolar()
     {
@@ -162,12 +172,16 @@ class ConfirmacionController
                 $estado = 1;
                 $servicios = $habitaciones = [];
 
+                // Ajustar habitaciones y servicios
                 if ($servicio === 'habitacion') {
+                    $habitacionModel = new Habitacion();
+                    $habitacion = $habitacionModel->obtenerInfoHabitacion($idHabitacion); // Obtener detalles de la habitación
                     $habitaciones[] = [
                         'id_habitacion' => $idHabitacion,
                         'fecha_inicio' => $fechaEntrada,
                         'fecha_fin' => $fechaSalida,
                     ];
+                    $nombreServicio = "Habitación: " . $habitacion['nombre']; // Asigna el nombre de la habitación
                 } else {
                     $idServicio = $this->obtenerIdServicio($servicio);
                     $servicios[] = [
@@ -176,32 +190,34 @@ class ConfirmacionController
                         'fecha_inicio' => $fechaEntrada,
                         'fecha_fin' => $fechaSalida,
                     ];
+                    $nombreServicio = ucfirst(str_replace('_', ' ', $servicio)); // Asigna un nombre genérico
                 }
 
                 // Guardar la reserva
                 $idReserva = $reservaModel->guardarReserva($idPersona, $estado, $servicios, $habitaciones);
+
                 // Guardar el pago
                 $reservaModel->guardarPago($idReserva, $paymentId, $precioTotal, 1);
-                $emailDestino = $_SESSION['user']['email'];
-                $nombreCliente = $_SESSION['user']['nombre'];
 
                 // Preparar detalles de la reserva para el correo
+                $emailDestino = $_SESSION['user']['email'];
+                $nombreCliente = $_SESSION['user']['nombre'];
                 $detalleReserva = [
-                    'servicio' => $servicio === 'habitacion' ? $reserva['id_habitacion'] : ucfirst(str_replace('_', ' ', $servicio)),
+                    'servicio' => $servicio === 'habitacion' ? $habitacion['nombre'] : ucfirst(str_replace('_', ' ', $servicio)),
                     'fecha_entrada' => $fechaEntrada,
                     'fecha_salida' => $fechaSalida,
                     'adultos' => $adultos,
-                    'precio_total' => $precioTotal,
+                    'precio_total' => number_format($precioTotal, 0, ',', '.') // Aplica formato aquí
                 ];
 
                 // Enviar el correo
-                EmailHelper::enviarCorreoReserva($emailDestino, $nombreCliente, $detalleReserva);
+                EmailHelper::enviarCorreoReserva($emailDestino, $nombreCliente, $detalleReserva, $idReserva);
 
                 // Limpiar la sesión de reserva
                 unset($_SESSION['reserva']);
 
-                echo "<script>alert('Reserva confirmada con éxito');</script>";
-                echo "<script>window.location.href = '/';</script>";
+                // Redirigir al inicio
+                header("Location: /");
                 exit();
             } catch (\Exception $e) {
                 error_log('Error al confirmar la reserva: ' . $e->getMessage());

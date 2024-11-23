@@ -130,4 +130,35 @@ include __DIR__ . "/../../templates/navbar.php";
 </section>
 <!-- End Service Details Area -->
 
+
+<!-- start Testimonials Area -->
+<section class="testimonials-area pb-100">
+    <div class="container">
+        <div class="section-title">
+            <span>Testimonios</span>
+            <h2>¿Qué dicen nuestros clientes?</h2>
+        </div>
+        <div class="testimonials-wrap owl-carousel owl-theme">
+            <?php if (!empty($resenhas)): ?>
+                <?php foreach ($resenhas as $resenha): ?>
+                    <div class="single-testimonials">
+                        <ul>
+                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                <li>
+                                    <i class="bx <?= $i <= $resenha['calificacion'] ? 'bxs-star' : 'bx-star'; ?>"></i>
+                                </li>
+                            <?php endfor; ?>
+                        </ul>
+                        <h3><?= htmlspecialchars($resenha['titulo']); ?></h3>
+                        <p>“<?= htmlspecialchars($resenha['descripcion']); ?>”</p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay reseñas disponibles para este servicio.</p>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+<!-- End Testimonials Area -->
+
 <?php include __DIR__ . "/../../templates/footer.php"; ?>

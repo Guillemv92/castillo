@@ -7,6 +7,7 @@ use App\Controllers\DisponibilidadController;
 use App\Controllers\CampingController;
 use App\Controllers\ConfirmacionController;
 use App\Controllers\ReservasController; // Agregar el nuevo controlador de reservas
+use App\Controllers\ResenhaController;
 
 // Instanciar los controladores
 $authController = new AuthController();
@@ -16,6 +17,7 @@ $disponibilidadController = new DisponibilidadController();
 $campingController = new CampingController();
 $confirmacionController = new ConfirmacionController();
 $reservasController = new ReservasController(); // Instanciar el nuevo controlador
+$resenhaController = new ResenhaController();
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -57,6 +59,10 @@ if ($url == '/' || $url == '/index.php') {
         http_response_code(405);
         echo "Método no permitido";
     }
+} elseif ($url == '/resenha') {
+    $resenhaController->mostrarFormulario();
+} elseif ($url == '/procesarResenha') {
+    $resenhaController->procesarResenha();
 }
 
 // Rutas para el carrito

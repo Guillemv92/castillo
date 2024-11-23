@@ -5,15 +5,18 @@ namespace App\Models;
 use Config\Database;
 use PDO;
 
-class Reserva {
+class Reserva
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $db = new Database();
         $this->conn = $db->getConnection();
     }
 
-    public function guardarReserva($idPersona, $estado, $servicios, $habitaciones) {
+    public function guardarReserva($idPersona, $estado, $servicios, $habitaciones)
+    {
         try {
             $this->conn->beginTransaction();
 
@@ -58,24 +61,24 @@ class Reserva {
     }
 
     public function guardarPago($idReserva, $paymentId, $montoTotal, $formaPago)
-{
-    try {
-        $query = "INSERT INTO pago (id_reserva, paypal_order_id, monto_pagado, forma_pago, fecha, estado_pago)
+    {
+        try {
+            $query = "INSERT INTO pago (id_reserva, paypal_order_id, monto_pagado, forma_pago, fecha, estado_pago)
                   VALUES (:idReserva, :paypalOrderId, :montoTotal, :formaPago, NOW(), 'COMPLETADO')";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':idReserva', $idReserva);
-        $stmt->bindParam(':paypalOrderId', $paymentId);
-        $stmt->bindParam(':montoTotal', $montoTotal);
-        $stmt->bindParam(':formaPago', $formaPago); // Ahora será un entero
-        $stmt->execute();
-    } catch (\Exception $e) {
-        throw new \Exception('Error al guardar el pago: ' . $e->getMessage());
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':idReserva', $idReserva);
+            $stmt->bindParam(':paypalOrderId', $paymentId);
+            $stmt->bindParam(':montoTotal', $montoTotal);
+            $stmt->bindParam(':formaPago', $formaPago); // Ahora será un entero
+            $stmt->execute();
+        } catch (\Exception $e) {
+            throw new \Exception('Error al guardar el pago: ' . $e->getMessage());
+        }
     }
-}
 
-public function obtenerReservasPorUsuario($idUsuario)
-{
-    $query = "
+    public function obtenerReservasPorUsuario($idUsuario)
+    {
+        $query = "
         SELECT 
             r.id_reserva,
             CASE
@@ -96,33 +99,59 @@ public function obtenerReservasPorUsuario($idUsuario)
           AND r.estado = 1 
     ";
 
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':idUsuario', $idUsuario);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idUsuario', $idUsuario);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
-public function cancelarReserva($idReserva) {
-    $query = "UPDATE reservas SET estado = 0 WHERE id_reserva = :idReserva";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':idReserva', $idReserva, PDO::PARAM_INT);
-    $stmt->execute();
-}
+    public function cancelarReserva($idReserva)
+    {
+        $query = "UPDATE reservas SET estado = 0 WHERE id_reserva = :idReserva";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idReserva', $idReserva, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
-public function editarReserva($idReserva, $fechaInicio, $fechaFin, $adultos) {
-    $query = "
+    public function editarReserva($idReserva, $fechaInicio, $fechaFin, $adultos)
+    {
+        $query = "
         UPDATE reserva_servicio
         SET fecha_inicio = :fechaInicio, 
             fecha_fin = :fechaFin, 
             cantidad = :adultos
         WHERE id_reserva = :idReserva";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':idReserva', $idReserva, PDO::PARAM_INT);
-    $stmt->bindParam(':fechaInicio', $fechaInicio);
-    $stmt->bindParam(':fechaFin', $fechaFin);
-    $stmt->bindParam(':adultos', $adultos, PDO::PARAM_INT);
-    $stmt->execute();
-}
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idReserva', $idReserva, PDO::PARAM_INT);
+        $stmt->bindParam(':fechaInicio', $fechaInicio);
+        $stmt->bindParam(':fechaFin', $fechaFin);
+        $stmt->bindParam(':adultos', $adultos, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
+    public function obtenerReservaPorId($idReserva)
+    {
+        $query = "
+        SELECT 
+            r.id_reserva,
+            r.id_persona,
+            r.fecha_reserva,
+            r.estado,
+            COALESCE(rs.fecha_inicio, rh.fecha_inicio) AS fecha_inicio,
+            COALESCE(rs.fecha_fin, rh.fecha_fin) AS fecha_fin
+        FROM reservas r
+        LEFT JOIN reserva_servicio rs ON r.id_reserva = rs.id_reserva
+        LEFT JOIN reserva_habitacion rh ON r.id_reserva = rh.id_reserva
+        WHERE r.id_reserva = :idReserva
+    ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idReserva', $idReserva);
+        $stmt->execute();
+
+        $reserva = $stmt->fetch(PDO::FETCH_ASSOC);
+        error_log("Resultado de la consulta: " . print_r($reserva, true));
+        return $reserva;
+    }
 }
