@@ -6,6 +6,7 @@ use App\Controllers\HabitacionesController;
 use App\Controllers\DisponibilidadController;
 use App\Controllers\CampingController;
 use App\Controllers\ConfirmacionController;
+use App\Controllers\ReservasController; // Agregar el nuevo controlador de reservas
 
 // Instanciar los controladores
 $authController = new AuthController();
@@ -14,6 +15,7 @@ $habitacionesController = new HabitacionesController();
 $disponibilidadController = new DisponibilidadController();
 $campingController = new CampingController();
 $confirmacionController = new ConfirmacionController();
+$reservasController = new ReservasController(); // Instanciar el nuevo controlador
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -71,6 +73,15 @@ elseif ($url == '/carrito') {
         echo "<script>window.location.href = '/carrito';</script>";
         exit();
     }
+}
+
+// Rutas para "Mis Reservas"
+elseif ($url == '/misReservas') {
+    $reservasController->mostrarMisReservas(); // Mostrar todas las reservas activas del usuario
+} elseif ($url == '/misReservas/cancelar') {
+    $reservasController->cancelarReserva(); // Cancelar una reserva
+} elseif ($url == '/misReservas/editar') {
+    $reservasController->editarReserva(); // Editar una reserva
 } else {
     http_response_code(404);
     echo "Página no encontrada";

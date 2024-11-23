@@ -46,7 +46,7 @@ if (session_status() === PHP_SESSION_NONE) {
 	<!-- Flatpickr JS -->
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="/public/assets/img/templates/logo2.png">
+	<link rel="icon" type="image/png" href="/assets/img/templates/logooooo.jpg">
 
 	<!-- TITLE -->
 	<title>Castillo</title>
@@ -109,7 +109,7 @@ if (session_status() === PHP_SESSION_NONE) {
 													<a href="profile.html" class="nav-link">Mi cuenta</a> <!-- Modifica la URL según tu necesidad -->
 												</li>
 												<li class="nav-item">
-													<a href="reservations.html" class="nav-link">Mis reservas</a>
+													<a href="/misReservas" class="nav-link">Mis reservas</a>
 												</li>
 												<li class="nav-item">
     												<a href="/carrito" class="nav-link">Carrito</a>

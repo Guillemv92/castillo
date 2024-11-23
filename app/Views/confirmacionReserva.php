@@ -11,7 +11,7 @@ include __DIR__ . "/../../templates/navbar.php";
         <div class="row">
             <div class="col-lg-8">
                 <div class="service-details-wrap service-right">
-                    <h3><?= $servicio === 'habitacion' ? htmlspecialchars($nombreHabitacion) : ucfirst(str_replace('_', ' ', $servicio)); ?></h3>
+                    <h3><?= $servicio === 'habitacion' ? htmlspecialchars($nombre) : ucfirst(str_replace('_', ' ', $servicio)); ?></h3>
                     <p><strong></strong> <?= htmlspecialchars($descripcion) ?></p>
                     <img class="imagen-servicio" src="<?= htmlspecialchars($imagen) ?>" alt="<?= htmlspecialchars($nombre) ?>">
 
@@ -25,7 +25,7 @@ include __DIR__ . "/../../templates/navbar.php";
                         <h3 class="service-details-title">Detalles de la Reserva</h3>
                         <ul>
                             <li>
-                                <strong>Servicio:</strong> <?= $servicio === 'habitacion' ? htmlspecialchars($nombreHabitacion) : ucfirst(str_replace('_', ' ', $servicio)); ?>
+                                <strong>Servicio:</strong> <?= $servicio === 'habitacion' ? htmlspecialchars($nombre) : ucfirst(str_replace('_', ' ', $servicio)); ?>
                                 <i class='bx bx-check'></i>
                             </li>
                             <li>
@@ -58,16 +58,12 @@ include __DIR__ . "/../../templates/navbar.php";
 
                     <!-- Script para manejar el botón de PayPal -->
                     <script>
-                        const guaraniAmount = <?= json_encode($costoTotal); ?>; // Precio total en guaraníes como entero
-                        // Conversión de guaraníes a dólares
-                        const conversionRate = 1 / 7300; // Ajusta según la tasa actual
                         paypal.Buttons({
                             createOrder: function(data, actions) {
-                                const usdAmount = (guaraniAmount * conversionRate).toFixed(2);
                                 return actions.order.create({
                                     purchase_units: [{
                                         amount: {
-                                            value: usdAmount,
+                                            value: <?= json_encode($precioEnDolares); ?>,
                                             currency_code: 'USD'
                                         }
                                     }]
@@ -75,9 +71,8 @@ include __DIR__ . "/../../templates/navbar.php";
                             },
                             onApprove: function(data, actions) {
                                 return actions.order.capture().then(function(details) {
-                                    alert('Pago completado con éxito');
-                                    // Redirigir a procesar la reserva con el ID de pago y datos de la reserva
-                                    window.location.href = `/procesarReserva?paymentId=${data.orderID}&servicio=${encodeURIComponent(<?= json_encode($servicio) ?>)}&id_habitacion=${encodeURIComponent(<?= json_encode($habitacionId ?? '') ?>)}&fecha_entrada=${encodeURIComponent(<?= json_encode($fechaEntrada) ?>)}&fecha_salida=${encodeURIComponent(<?= json_encode($fechaSalida) ?>)}&adultos=${encodeURIComponent(<?= json_encode($adultos) ?>)}&precio_total=${encodeURIComponent(<?= json_encode($costoTotal) ?>)}`;
+                                    // Redirigir con el paymentId
+                                    window.location.href = `/procesarReserva?paymentId=${data.orderID}`;
                                 });
                             }
                         }).render('#paypal-button-container');
@@ -127,7 +122,7 @@ include __DIR__ . "/../../templates/navbar.php";
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

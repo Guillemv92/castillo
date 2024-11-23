@@ -10,17 +10,21 @@ class Usuario {
     public function autenticar($email, $password) {
         $db = new Database();
         $conn = $db->getConnection();
-
-        $query = "SELECT * FROM personas WHERE email = :email";
+    
+        // Seleccionar solo los campos necesarios
+        $query = "SELECT id_persona, nombre, email, contrasenha FROM personas WHERE email = :email";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-
+    
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
+        // Verificar si el usuario existe y la contraseña coincide
         if ($usuario && $password === $usuario['contrasenha']) {
+            unset($usuario['contrasenha']); // Opcional: eliminar la contraseña del array para mayor seguridad
             return $usuario;
         }
+    
         return false;
     }
 

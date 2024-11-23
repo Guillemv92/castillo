@@ -20,16 +20,17 @@ class AuthController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['name'];
             $password = $_POST['password'];
-
+    
             // Instancia del modelo Usuario
             $usuarioModel = new Usuario();
             $usuario = $usuarioModel->autenticar($email, $password);
-
+    
             if ($usuario) {
                 session_start();
                 $_SESSION['user'] = [
                     'id' => $usuario['id_persona'], // Guarda el ID del usuario en la sesión
-                    'nombre' => $usuario['nombre']
+                    'nombre' => $usuario['nombre'],
+                    'email' => $usuario['email'], // Guarda el email del usuario
                 ];
                 header("Location: /index.php"); 
                 exit();
