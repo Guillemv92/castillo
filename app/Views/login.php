@@ -6,8 +6,7 @@
             <div class="col-12">
                 <div class="contact-form-action">
                     <div class="form-heading text-center">
-                        <h3 class="form-title">Login to your account!</h3>
-                        <p class="form-desc">With your social network.</p>
+                        <h3 class="form-title">¡Inicia sesión en tu cuenta!</h3>
                     </div>
                     <form method="post" action="/procesarLogin">
                         <div class="row">
@@ -16,35 +15,35 @@
                                     <p style="color: red;"><?= $error ?></p>
                                 <?php endif; ?>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="name" placeholder="Username or Email">
+                                    <input class="form-control" type="text" name="name" placeholder="Email">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="password" placeholder="Password">
+                                    <input class="form-control" type="password" name="password" placeholder="Contraseña">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 form-condition">
                                 <div class="agree-label">
                                     <input type="checkbox" id="chb1">
                                     <label for="chb1">
-                                        Remember Me
+                                        Recuérdame
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6">
-                                <a class="forget" href="recover-password.html">Forgot my password?</a>
+                                <a class="forget" href="recover-password.html">¿Olvidaste tu contraseña?</a>
                             </div>
                             <div class="col-12">
                                 <button class="default-btn btn-two" type="submit">
-                                    Log In Now
+                                    Iniciar Sesión
                                     <i class="flaticon-right"></i>
                                 </button>
                             </div>
                             <div class="col-12">
                                 <p class="account-desc">
-                                    Not a member?
-                                    <a href="/registro">Register</a>
+                                    ¿No tienes una cuenta?
+                                    <a href="/registro">Regístrate</a>
                                 </p>
                             </div>
                         </div>
