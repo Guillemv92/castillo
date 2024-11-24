@@ -3070,3 +3070,135 @@ Cart Area Style
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para un efecto elegante */
   margin: 15px 0; /* Espaciado alrededor de la imagen */
 }
+
+
+
+
+
+/* Estilo general del body */
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../img/otros/foto-castillo.jpg') no-repeat center center fixed; 
+  background-size: cover; 
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+}
+
+/* Contenedor del formulario */
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Título del formulario */
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Estilos de los grupos de formulario */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+/* Campos de texto y textarea */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+input[type="text"]:hover,
+textarea:hover {
+  border-color: #cc8c18;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #cc8c18;
+  outline: none;
+  background-color: #fff8ec;
+}
+
+/* Textarea */
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* Botón */
+button {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #cc8c18;
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Estilo de las estrellas */
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin-top: -5px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 30px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-left: 5px;
+}
+
+.rating input:checked ~ label {
+  color: #ffc107;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ffc107;
+}
