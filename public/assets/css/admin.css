@@ -1,0 +1,158 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuente y Colores base */
+html, body {
+    font-family: sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    height: 100%;
+}
+
+/* Layout Principal */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: #343a40;
+    color: #fff;
+    padding: 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Navegación principal */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #adb5bd;
+}
+
+/* Contenido principal */
+main {
+    flex: 1;
+    padding: 1.5rem;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin: 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Titulos de sección */
+main h2 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: #495057;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: #ffffff;
+}
+
+table thead {
+    background: #343a40;
+    color: #fff;
+}
+
+table thead th {
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+table tbody td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Botones en tablas */
+table a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+table a:hover {
+    text-decoration: underline;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+}
+
+form label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background: #fff;
+}
+
+form button {
+    background: #343a40;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+form button:hover {
+    background: #495057;
+}
+
+/* Footer */
+footer {
+    background: #f8f9fa;
+    color: #6c757d;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-top: 1px solid #dee2e6;
+}

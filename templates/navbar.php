@@ -115,7 +115,7 @@ if (session_status() === PHP_SESSION_NONE) {
     												<a href="/carrito" class="nav-link">Carrito</a>
 												</li>
 												<li class="nav-item">
-													<a href="admin.html" class="nav-link">Admin</a>
+													<a href="/admin" class="nav-link">Admin</a>
 												</li>
 												<li class="nav-item">
                                                 <a href="/logout" class="nav-link">Cerrar sesión</a> <!-- Opción para cerrar sesión -->
