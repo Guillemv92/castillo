@@ -1,4 +1,3 @@
-// Eventos al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
     const enlaces = document.querySelectorAll('.admin-link');
     const main = document.querySelector('main');
@@ -26,6 +25,8 @@ function configurarNavegacion(enlaces, main) {
                         configurarEventosTabla(main);
                     } else if (url.includes('habitaciones-api')) {
                         main.innerHTML = generarTablaHabitaciones(data);
+                        configurarModalInsercionHabitaciones(main);
+                        configurarEventosTablaHabitaciones(main);
                     }
                 })
                 .catch(err => {
@@ -36,7 +37,7 @@ function configurarNavegacion(enlaces, main) {
     });
 }
 
-// Generación de tablas dinámicas
+// ------------------------- SERVICIOS -------------------------
 function generarTablaServicios(servicios) {
     if (!Array.isArray(servicios) || servicios.length === 0) {
         return '<p>No hay servicios disponibles</p>';
@@ -64,7 +65,7 @@ function generarTablaServicios(servicios) {
                     <label>Descripción:</label>
                     <textarea name="descripcion"></textarea>
                     <label>Imagen URL:</label>
-                    <input type="url" name="imagen">
+                    <input type="text" name="imagen">
                     <button type="submit">Insertar Servicio</button>
                 </form>
             </div>
@@ -89,7 +90,7 @@ function generarTablaServicios(servicios) {
                     <label>Descripción:</label>
                     <textarea name="descripcion"></textarea>
                     <label>Imagen URL:</label>
-                    <input type="url" name="imagen">
+                    <input type="text" name="imagen">
                     <button type="submit">Guardar Cambios</button>
                 </form>
             </div>
@@ -133,7 +134,6 @@ function generarFilaServicio(servicio) {
     `;
 }
 
-// Configuración de modales y eventos
 function configurarModalInsercion(main) {
     const modal = main.querySelector('#modal-insertar-servicio');
     const btnAbrir = main.querySelector('#btn-agregar-servicio');
@@ -168,7 +168,7 @@ function configurarEventosTabla(main) {
             form.precio.value = fila.querySelector('td:nth-child(3)').textContent;
             form.cantidad_limite.value = fila.querySelector('td:nth-child(4)').textContent !== 'N/A' ? fila.querySelector('td:nth-child(4)').textContent : '';
             form.estado.value = fila.querySelector('td:nth-child(5)').textContent === 'Activo' ? 'A' : 'I';
-            form.descripcion.value = fila.querySelector('td:nth-child(6)').textContent;
+            form.descripcion.value = fila.querySelector('td:nth-child(6)').textContent === 'Sin descripción' ? '' : fila.querySelector('td:nth-child(6)').textContent;
             form.imagen.value = fila.querySelector('td:nth-child(7) img')?.getAttribute('src') || '';
 
             modalEditar.style.display = 'block';
@@ -192,7 +192,7 @@ function configurarEventosTabla(main) {
     });
 }
 
-// Operaciones CRUD
+// CRUD Servicios
 function insertarServicio(formData, main) {
     const data = Object.fromEntries(formData.entries());
     fetch('/admin/servicios-api', {
@@ -202,6 +202,10 @@ function insertarServicio(formData, main) {
     })
         .then(response => response.json())
         .then(nuevoServicio => {
+            if (nuevoServicio.error) {
+                alert('Error: ' + nuevoServicio.error);
+                return;
+            }
             alert('Servicio insertado correctamente');
             main.querySelector('table tbody').insertAdjacentHTML('beforeend', generarFilaServicio(nuevoServicio));
         })
@@ -217,7 +221,12 @@ function editarServicio(formData) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id_servicio: id, ...data })
     })
-        .then(() => {
+        .then(response => response.json())
+        .then(res => {
+            if (res.error) {
+                alert('Error al actualizar el servicio: ' + res.error);
+                return;
+            }
             alert('Servicio actualizado correctamente');
             location.reload();
         })
@@ -230,9 +239,236 @@ function eliminarServicio(id, fila) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id })
     })
-        .then(() => {
+        .then(response => response.json())
+        .then(res => {
+            if (res.error) {
+                alert('Error al eliminar el servicio: ' + res.error);
+                return;
+            }
             alert('Servicio eliminado correctamente');
             fila.remove();
         })
         .catch(err => alert('Error al eliminar el servicio.'));
+}
+
+// -------------------- HABITACIONES --------------------
+function generarTablaHabitaciones(habitaciones) {
+    if (!Array.isArray(habitaciones) || habitaciones.length === 0) {
+        return '<p>No hay habitaciones disponibles</p>';
+    }
+
+    let html = `
+        <h2>Habitaciones</h2>
+        <button id="btn-agregar-habitacion">Agregar Habitación</button>
+        <div id="modal-insertar-habitacion" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="form-insertar-habitacion">
+                    <h3>Insertar Nueva Habitación</h3>
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" required>
+                    <label>Capacidad:</label>
+                    <input type="number" name="capacidad" required>
+                    <label>Precio:</label>
+                    <input type="number" name="precio" step="0.01" required>
+                    <label>Estado:</label>
+                    <!-- Cambiamos aquí a una sola letra -->
+                    <select name="estado">
+                        <option value="A">Disponible</option>
+                        <option value="O">Ocupada</option>
+                    </select>
+                    <label>Descripción:</label>
+                    <textarea name="descripcion"></textarea>
+                    <label>Imagen URL:</label>
+                    <input type="text" name="imagen">
+                    <button type="submit">Insertar Habitación</button>
+                </form>
+            </div>
+        </div>
+        <div id="modal-editar-habitacion" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="form-editar-habitacion">
+                    <h3>Editar Habitación</h3>
+                    <input type="hidden" name="id_habitacion">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" required>
+                    <label>Capacidad:</label>
+                    <input type="number" name="capacidad" required>
+                    <label>Precio:</label>
+                    <input type="number" name="precio" step="0.01" required>
+                    <label>Estado:</label>
+                    <!-- También aquí usamos A u O -->
+                    <select name="estado">
+                        <option value="A">Disponible</option>
+                        <option value="O">Ocupada</option>
+                    </select>
+                    <label>Descripción:</label>
+                    <textarea name="descripcion"></textarea>
+                    <label>Imagen URL:</label>
+                    <input type="text" name="imagen">
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Habitación</th>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${habitaciones.map(habitacion => generarFilaHabitacion(habitacion)).join('')}
+            </tbody>
+        </table>
+    `;
+    return html;
+}
+
+function generarFilaHabitacion(habitacion) {
+    // Traducimos el estado
+    const estadoTexto = habitacion.estado === 'A' ? 'Disponible' : 'Ocupada';
+    return `
+        <tr data-id="${habitacion.id_habitacion}">
+            <td>${habitacion.id_habitacion}</td>
+            <td>${habitacion.nombre}</td>
+            <td>${habitacion.capacidad}</td>
+            <td>${habitacion.precio}</td>
+            <td>${estadoTexto}</td>
+            <td>${habitacion.descripcion || 'Sin descripción'}</td>
+            <td>${habitacion.imagen ? `<img src="${habitacion.imagen}" alt="Imagen de ${habitacion.nombre}" style="max-width:100px;">` : 'Sin imagen'}</td>
+            <td>
+                <button class="btn-editar">Editar</button>
+                <button class="btn-eliminar">Eliminar</button>
+            </td>
+        </tr>
+    `;
+}
+
+function configurarModalInsercionHabitaciones(main) {
+    const modal = main.querySelector('#modal-insertar-habitacion');
+    const btnAbrir = main.querySelector('#btn-agregar-habitacion');
+    const btnCerrar = modal.querySelector('.close');
+
+    btnAbrir.addEventListener('click', () => modal.style.display = 'block');
+    btnCerrar.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) modal.style.display = 'none';
+    });
+
+    modal.querySelector('#form-insertar-habitacion').addEventListener('submit', (event) => {
+        event.preventDefault();
+        insertarHabitacion(new FormData(event.target), main);
+        modal.style.display = 'none';
+    });
+}
+
+function configurarEventosTablaHabitaciones(main) {
+    const modalEditar = main.querySelector('#modal-editar-habitacion');
+
+    main.addEventListener('click', (event) => {
+        const target = event.target;
+
+        if (target.classList.contains('btn-editar')) {
+            const fila = target.closest('tr');
+            const id = fila.getAttribute('data-id');
+            const form = modalEditar.querySelector('#form-editar-habitacion');
+
+            form.id_habitacion.value = id;
+            form.nombre.value = fila.querySelector('td:nth-child(2)').textContent;
+            form.capacidad.value = fila.querySelector('td:nth-child(3)').textContent;
+            form.precio.value = fila.querySelector('td:nth-child(4)').textContent;
+
+            // Convertimos el texto visible (Disponible/Ocupada) al valor interno (A/O)
+            const textoEstado = fila.querySelector('td:nth-child(5)').textContent;
+            form.estado.value = textoEstado === 'Disponible' ? 'A' : 'O';
+
+            form.descripcion.value = fila.querySelector('td:nth-child(6)').textContent === 'Sin descripción' ? '' : fila.querySelector('td:nth-child(6)').textContent;
+            form.imagen.value = fila.querySelector('td:nth-child(7) img')?.getAttribute('src') || '';
+
+            modalEditar.style.display = 'block';
+        }
+
+        if (target.classList.contains('btn-eliminar')) {
+            const fila = target.closest('tr');
+            const id = fila.getAttribute('data-id');
+            if (confirm('¿Estás seguro de eliminar esta habitación?')) eliminarHabitacion(id, fila);
+        }
+    });
+
+    modalEditar.querySelector('.close').addEventListener('click', () => {
+        modalEditar.style.display = 'none';
+    });
+
+    modalEditar.querySelector('#form-editar-habitacion').addEventListener('submit', (event) => {
+        event.preventDefault();
+        editarHabitacion(new FormData(event.target));
+        modalEditar.style.display = 'none';
+    });
+}
+
+// CRUD Habitaciones
+function insertarHabitacion(formData, main) {
+    const data = Object.fromEntries(formData.entries());
+    fetch('/admin/habitaciones-api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(nuevaHabitacion => {
+            if (nuevaHabitacion.error) {
+                alert('Error al insertar la habitación: ' + nuevaHabitacion.error);
+                return;
+            }
+            alert('Habitación insertada correctamente');
+            main.querySelector('table tbody').insertAdjacentHTML('beforeend', generarFilaHabitacion(nuevaHabitacion));
+        })
+        .catch(err => alert('Error al insertar la habitación.'));
+}
+
+function editarHabitacion(formData) {
+    const id = formData.get('id_habitacion');
+    const data = Object.fromEntries(formData.entries());
+
+    fetch('/admin/habitaciones-api', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_habitacion: id, ...data })
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.error) {
+                alert('Error al actualizar la habitación: ' + res.error);
+                return;
+            }
+            alert('Habitación actualizada correctamente');
+            location.reload();
+        })
+        .catch(err => alert('Error al actualizar la habitación.'));
+}
+
+function eliminarHabitacion(id, fila) {
+    fetch('/admin/habitaciones-api', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.error) {
+                alert('Error al eliminar la habitación: ' + res.error);
+                return;
+            }
+            alert('Habitación eliminada correctamente');
+            fila.remove();
+        })
+        .catch(err => alert('Error al eliminar la habitación.'));
 }
