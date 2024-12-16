@@ -6,13 +6,13 @@ use Config\Database;
 use PDO;
 
 class Usuario {
-    // Autenticación de usuario (como lo tienes)
+    // Autenticación de usuario 
     public function autenticar($email, $password) {
         $db = new Database();
         $conn = $db->getConnection();
     
         // Seleccionar solo los campos necesarios
-        $query = "SELECT id_persona, nombre, email, contrasenha FROM personas WHERE email = :email";
+        $query = "SELECT id_persona, nombre, email, contrasenha, rol FROM personas WHERE email = :email";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -20,8 +20,8 @@ class Usuario {
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     
         // Verificar si el usuario existe y la contraseña coincide
-        if ($usuario && $password === $usuario['contrasenha']) {
-            unset($usuario['contrasenha']); // Opcional: eliminar la contraseña del array para mayor seguridad
+        if ($usuario && password_verify($password, $usuario['contrasenha'])) {
+            unset($usuario['contrasenha']); 
             return $usuario;
         }
     
@@ -35,9 +35,10 @@ class Usuario {
 
         // Hash de la contraseña
         $hashedPassword = password_hash($contrasenha, PASSWORD_DEFAULT);
+        $rol = 'C';
 
-        $query = "INSERT INTO personas (nombre, apellido, email, telefono, cedula, contrasenha) 
-                  VALUES (:nombre, :apellido, :email, :telefono, :cedula, :contrasenha)";
+        $query = "INSERT INTO personas (nombre, apellido, email, telefono, cedula, contrasenha, rol) 
+                  VALUES (:nombre, :apellido, :email, :telefono, :cedula, :contrasenha, :rol)";
         $stmt = $conn->prepare($query);
 
         $stmt->bindParam(':nombre', $nombre);
@@ -46,6 +47,7 @@ class Usuario {
         $stmt->bindParam(':telefono', $telefono);
         $stmt->bindParam(':cedula', $cedula);
         $stmt->bindParam(':contrasenha', $hashedPassword);
+        $stmt->bindParam(':rol', $rol);
 
         return $stmt->execute();
     }

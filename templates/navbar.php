@@ -1,6 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+	
 }
 ?>
 <!doctype html>
@@ -106,7 +107,7 @@ if (session_status() === PHP_SESSION_NONE) {
 											</a>
 											<ul class="dropdown-menu">
 												<li class="nav-item">
-													<a href="profile.html" class="nav-link">Mi cuenta</a> <!-- Modifica la URL según tu necesidad -->
+													<a href="profile.html" class="nav-link">Mi cuenta</a> 
 												</li>
 												<li class="nav-item">
 													<a href="/misReservas" class="nav-link">Mis reservas</a>
@@ -115,11 +116,13 @@ if (session_status() === PHP_SESSION_NONE) {
     												<a href="/carrito" class="nav-link">Carrito</a>
 												</li>
 												<li class="nav-item">
-													<a href="/admin" class="nav-link">Admin</a>
-												</li>
-												<li class="nav-item">
                                                 <a href="/logout" class="nav-link">Cerrar sesión</a> <!-- Opción para cerrar sesión -->
                                             	</li>
+												<?php if (isset($_SESSION['user']['rol']) && $_SESSION['user']['rol'] === 'A'): ?>
+    												<li class="nav-item">
+        											<a href="/admin" class="nav-link">Admin</a>
+    												</li>
+												<?php endif; ?>
 											</ul>
 										<?php endif; ?>
 									</li>

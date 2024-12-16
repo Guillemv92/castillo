@@ -28,9 +28,10 @@ class AuthController {
             if ($usuario) {
                 session_start();
                 $_SESSION['user'] = [
-                    'id' => $usuario['id_persona'], // Guarda el ID del usuario en la sesión
+                    'id' => $usuario['id_persona'], 
                     'nombre' => $usuario['nombre'],
-                    'email' => $usuario['email'], // Guarda el email del usuario
+                    'email' => $usuario['email'], 
+                    'rol' => $usuario['rol']
                 ];
                 header("Location: /index.php"); 
                 exit();
