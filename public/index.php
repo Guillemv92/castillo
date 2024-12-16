@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../config/Database.php';
+require(__DIR__ . '/../config/Database.php');
 
 use Config\Database;
 
