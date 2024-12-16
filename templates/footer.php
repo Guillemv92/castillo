@@ -1,4 +1,4 @@
-		<!-- Start Footer Area -->
+<!-- Start Footer Area -->
 		<footer class="footer-top-area pt-140 jarallax">
 			<div class="container">
 
@@ -6,9 +6,6 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-6">
 							<div class="single-widget">
-								<a href="index.html">
-									<img src="../assets/img/home-one/footer-logo.png" alt="Image">
-								</a>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat molestiae corporis, magni maxime perferendis ducimus.</p>
 								<ul class="social-icon">
 									<li>
@@ -153,23 +150,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="footer-bottom-area">
-					<div class="row align-items-center">
-						<div class="col-lg-6">
-							<div class="copy-right">
-								<p>Copyright @2022 <a href="index.html">Ecorik</a>. All Rights Reserved</p>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="designed">
-								<p>Designed By <i class='bx bx-heart'></i> <a href="https://envytheme.com/" target="_blank">EnvyTheme</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer-shape">
-				<img src="../assets/img/shape/white-shape-bottom.png" alt="Image">
+
 			</div>
 		</footer>
 		<!-- End Footer Area -->
