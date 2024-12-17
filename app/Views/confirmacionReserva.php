@@ -1,5 +1,4 @@
 <?php
-session_start();
 include __DIR__ . "/../../templates/navbar.php";
 // Los datos ya están disponibles gracias al controlador
 ?>
