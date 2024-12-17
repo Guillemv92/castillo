@@ -11,8 +11,8 @@ class Servicio {
     $conn = $db->getConnection();
 
     // Formatear fechas a 'Y-m-d' antes de usarlas en la consulta
-    $fechaEntrada = DateTime::createFromFormat('d/m/Y', $fechaEntrada)->format('Y-m-d');
-    $fechaSalida = DateTime::createFromFormat('d/m/Y', $fechaSalida)->format('Y-m-d');
+    $fechaEntrada = \DateTime::createFromFormat('d/m/Y', $fechaEntrada)->format('Y-m-d');
+    $fechaSalida = \DateTime::createFromFormat('d/m/Y', $fechaSalida)->format('Y-m-d');
 
     // Paso 1: Obtener la cantidad límite del servicio
     $queryCantidadLimite = "SELECT cantidad_limite 
