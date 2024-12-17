@@ -33,7 +33,7 @@ class ConfirmacionController
     }
 
     if ($servicio === 'habitacion') {
-        $habitacionId = $_GET['id_habitacion'] ?? null;
+        $habitacionId = $_GET['id_habitacion'];
         $habitacionModel = new Habitacion();
 
         // Obtener la información de la habitación
@@ -106,7 +106,7 @@ class ConfirmacionController
 
     $_SESSION['reserva'] = [
         'servicio' => $servicio,
-        'id_habitacion' => $habitacionId ?? null,
+        'id_habitacion' => $habitacionId,
         'fecha_entrada' => $fechaEntrada,
         'fecha_salida' => $fechaSalida,
         'adultos' => $adultos,
