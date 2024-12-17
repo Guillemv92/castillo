@@ -18,6 +18,10 @@ class PasareldiaController {
     }
 
     public function procesarReserva() {
+         if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fechaEntrada = $_POST['fecha_entrada'];
             $adultos = $_POST['adult'];
