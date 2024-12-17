@@ -10,6 +10,11 @@ class Habitacion {
         $db = new Database();
         $conn = $db->getConnection();
 
+        // Formatear fechas a 'Y-m-d' antes de usarlas en la consulta
+    $fechaEntrada = \DateTime::createFromFormat('d/m/Y', $fechaEntrada)->format('Y-m-d');
+    $fechaSalida = \DateTime::createFromFormat('d/m/Y', $fechaSalida)->format('Y-m-d');
+
+
         $query = "SELECT h.*, h.precio 
                   FROM habitaciones h
                   WHERE h.id_habitacion NOT IN (
