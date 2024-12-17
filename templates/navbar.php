@@ -1,4 +1,11 @@
-
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();  // Inicia la sesión si aún no está iniciada
+} else {
+    // La sesión ya está iniciada, no se hace nada
+    // O puedes agregar un comentario aquí si prefieres
+}
+?>
 <!doctype html>
 <html lang="es">
 
