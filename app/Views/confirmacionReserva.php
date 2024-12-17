@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+	
+}
 include __DIR__ . "/../../templates/navbar.php";
 // Los datos ya están disponibles gracias al controlador
 ?>
