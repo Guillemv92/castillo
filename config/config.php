@@ -10,9 +10,9 @@ $dotenv->load();
 
 return [
     'db' => [
-        'host' => $_ENV['DB_HOST'] ?? 'localhost',
-        'dbname' => $_ENV['DB_NAME'] ?? 'castillo',
+        'host' => $_ENV['DB_HOST'] ?? 'postgres.railway.internal',
+        'dbname' => $_ENV['DB_NAME'] ?? 'railway',
         'username' => $_ENV['DB_USERNAME'] ?? 'postgres',
-        'password' => $_ENV['DB_PASSWORD'] ?? 'password',
+        'password' => $_ENV['DB_PASSWORD'] ?? 'xOLWoqUficeJXphwKkezKlKBnJNQtlCR',
     ],
 ];
