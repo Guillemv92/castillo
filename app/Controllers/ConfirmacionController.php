@@ -42,11 +42,15 @@ class ConfirmacionController
 
         // Obtener la información de la habitación
         $habitacion = $habitacionModel->obtenerInfoHabitacion($habitacionId);
+        if (!$habitacion) {
+            echo "<script>alert('Habitación no encontrada.');</script>";
+            echo "<script>window.location.href = '/';</script>";
+            exit();
+        }
         $precioUnitario = (int) $habitacion['precio'];
         $nombre = $habitacion['nombre'];
         $descripcion = $habitacion['descripcion'];
         $imagen = $habitacion['imagen'];
-
         // Convertir las fechas al formato 'Y-m-d'
         $fechaEntradaFormato = \DateTime::createFromFormat('d/m/Y', $fechaEntrada);
         $fechaSalidaFormato = \DateTime::createFromFormat('d/m/Y', $fechaSalida);
@@ -74,6 +78,11 @@ class ConfirmacionController
 
         // Obtener la información del servicio
         $detalleServicio = $servicioModel->obtenerInfoServicio($idServicio);
+        if (!$detalleServicio) {
+            echo "<script>alert('Servicio no encontrado.');</script>";
+            echo "<script>window.location.href = '/';</script>";
+            exit();
+        }
         $precioUnitario = (int) $detalleServicio['precio'];
         $nombre = $detalleServicio['nombre'];
         $descripcion = $detalleServicio['descripcion'];
