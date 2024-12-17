@@ -11,10 +11,6 @@ class ConfirmacionController
 {
     public function mostrarConfirmacion()
 {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
     // Obtener datos de la reserva desde la URL
     $servicio = $_GET['servicio'];
     $fechaEntrada = $_GET['fecha_entrada'];
