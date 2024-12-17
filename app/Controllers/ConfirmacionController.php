@@ -105,13 +105,13 @@ class ConfirmacionController
     $precioEnDolares = round($costoTotal / $cotizacionDolar, 2);
 
     $_SESSION['reserva'] = [
-        'servicio' => $servicio,
-        'id_habitacion' => $habitacionId,
-        'fecha_entrada' => $fechaEntrada,
-        'fecha_salida' => $fechaSalida,
-        'adultos' => $adultos,
-        'precio_total' => $costoTotal,
-    ];
+    'servicio' => $servicio,
+    'id_habitacion' => isset($habitacionId) ? $habitacionId : null, // Si no está definida, se asigna null
+    'fecha_entrada' => $fechaEntrada,
+    'fecha_salida' => $fechaSalida,
+    'adultos' => $adultos,
+    'precio_total' => $costoTotal,
+];
 
     // Incluir la vista de confirmación con los datos necesarios
     include __DIR__ . '/../Views/confirmacionReserva.php';
