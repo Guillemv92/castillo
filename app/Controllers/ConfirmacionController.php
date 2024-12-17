@@ -16,10 +16,10 @@ class ConfirmacionController
     }
 
     // Obtener datos de la reserva desde la URL
-    $servicio = $_GET['servicio'] ?? '';
-    $fechaEntrada = $_GET['fecha_entrada'] ?? null;
-    $fechaSalida = $_GET['fecha_salida'] ?? null;
-    $adultos = $_GET['adultos'] ?? 1;
+    $servicio = $_GET['servicio'];
+    $fechaEntrada = $_GET['fecha_entrada'];
+    $fechaSalida = $_GET['fecha_salida'];
+    $adultos = $_GET['adultos'];
     $precioUnitario = 0;
     $costoTotal = 0;
     $nombre = '';
